@@ -1,9 +1,10 @@
 ﻿using System;
+using ASSET.Common;
 
 
 namespace ASSET.Models.Master
 {
-    public class AssetCategory
+    public class AssetCategory : Base
 	{
         public int AssetCategoryId { get; set; }
         public string Code { get; set; }

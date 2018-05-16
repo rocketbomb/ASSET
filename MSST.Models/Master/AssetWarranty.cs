@@ -1,10 +1,10 @@
 ﻿using System;
-
+using ASSET.Common;
 
 
 namespace ASSET.Models.Master
 {
-    public class AssetWarranty
+    public class AssetWarranty : Base
     {
         public int AssetWarrantyId { get; set; }
         public string InvoiceNumber { get; set; }

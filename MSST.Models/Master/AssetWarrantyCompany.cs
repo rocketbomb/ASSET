@@ -1,9 +1,9 @@
 ﻿using System;
-
+using ASSET.Common;
 
 namespace ASSET.Models.Master
 {
-    public class AssetWarrantyCompany
+    public class AssetWarrantyCompany : Base
 	{
         public int AssetWarrantyCompanyId { get; set; }
         public string Code { get; set; }

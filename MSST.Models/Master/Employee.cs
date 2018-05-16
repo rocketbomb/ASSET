@@ -1,9 +1,9 @@
 ﻿using System;
-
+using ASSET.Common;
 
 namespace ASSET.Models.Master
 {
-    public class Employee
+    public class Employee : Base
     {
         public int EmployeeId { get; set; }
         public string Code { get; set; }

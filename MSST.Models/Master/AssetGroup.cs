@@ -1,9 +1,9 @@
 ﻿using System;
-
+using ASSET.Common;
 
 namespace ASSET.Models.Master
 {
-    public class AssetGroup
+    public class AssetGroup : Base
 	{
         public int AssetGroupId { get; set; }
         public string Code { get; set; }
