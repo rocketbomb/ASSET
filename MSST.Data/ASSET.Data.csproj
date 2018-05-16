@@ -7,11 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20180516055550_Update8.cs" />
+    <Compile Remove="Migrations\20180516060015_Update8.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8" />
     <PackageReference Include="System.Data.Common" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MSST.Common\ASSET.Common.csproj" />
     <ProjectReference Include="..\MSST.Models\ASSET.Models.csproj" />
   </ItemGroup>
 

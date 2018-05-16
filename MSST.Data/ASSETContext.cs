@@ -1,13 +1,14 @@
 ﻿using ASSET.Models.Master;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace ASSET.Data
 {
-    public class ASSETContext : DbContext {
-        public ASSETContext(DbContextOptions<ASSETContext> options) : base(options)
-        {
-        }
+	public class ASSETContext : DbContext
+	{
+		public ASSETContext(DbContextOptions<ASSETContext> options) : base(options)
+		{
+		}
+
 
 		public DbSet<AssetCategory> AssetCategory { get; set; }
 		public DbSet<AssetDetail> AssetDetail { get; set; }

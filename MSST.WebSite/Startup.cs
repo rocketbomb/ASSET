@@ -25,15 +25,11 @@ namespace ASSET.WebSite
         {
             services.AddMvc();
 
+            //services.AddDbContext<ASSETContext>(options => options.UseSqlServer(connection));
+			services.AddDbContext<ASSETContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Development")));
 
 
-            //var connectionTemp = @"Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Connection=True;ConnectRetryCount=0";
-
-            var connection = @"Server = 122.155.10.240,1390; Database = ASSET; User Id = sa; Password = Password$1";
-            //services.AddDbContext<ASSETContext>(options=>options.UseSqlServer(connection));
-
-            services.AddDbContext<ASSETContext>(options => options.UseSqlServer(connection));
-        }
+		}
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

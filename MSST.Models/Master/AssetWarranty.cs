@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ASSET.Common;
 
 
@@ -6,7 +7,12 @@ namespace ASSET.Models.Master
 {
     public class AssetWarranty : Base
     {
-        public int AssetWarrantyId { get; set; }
+		public AssetWarranty()
+		{
+			
+		}
+
+		public int AssetWarrantyId { get; set; }
         public string InvoiceNumber { get; set; }
         public string VoucherNumber { get; set; }
         public int SupplierId { get; set; }
@@ -25,7 +31,5 @@ namespace ASSET.Models.Master
 		public string Remark { get; set; }
 
 
-	
-
-    }
+	}
 }
