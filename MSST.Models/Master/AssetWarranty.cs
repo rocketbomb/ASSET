@@ -30,6 +30,8 @@ namespace ASSET.Models.Master
 		public double Premium { get; set; }
 		public string Remark { get; set; }
 
+		public virtual AssetDetail AssetDetail { get; set; }
+
 
 	}
 }

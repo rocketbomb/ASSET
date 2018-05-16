@@ -13,7 +13,6 @@ namespace ASSET.Data
 		public DbSet<AssetCategory> AssetCategory { get; set; }
 		public DbSet<AssetDetail> AssetDetail { get; set; }
 		public DbSet<AssetGroup> AssetGroup { get; set; }
-		public DbSet<AssetMaster> AssetMaster { get; set; }
 		public DbSet<AssetType> AssetType { get; set; }
 
 

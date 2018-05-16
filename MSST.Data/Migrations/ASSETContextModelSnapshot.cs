@@ -60,8 +60,6 @@ namespace ASSET.Data.Migrations
 
                     b.Property<double>("AssetAge");
 
-                    b.Property<int?>("AssetDetailId");
-
                     b.Property<double>("CalculatePrice");
 
                     b.Property<double>("Cost");
@@ -101,8 +99,6 @@ namespace ASSET.Data.Migrations
 
                     b.HasKey("AssetDepreciationId");
 
-                    b.HasIndex("AssetDetailId");
-
                     b.ToTable("AssetDepreciation");
                 });
 
@@ -110,6 +106,10 @@ namespace ASSET.Data.Migrations
                 {
                     b.Property<int>("AssetDetailId")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("AssetDepreciationId");
+
+                    b.Property<int?>("AssetWarrantyId");
 
                     b.Property<string>("Barcode");
 
@@ -124,11 +124,21 @@ namespace ASSET.Data.Migrations
 
                     b.Property<DateTime?>("CreateDate");
 
+                    b.Property<int?>("EmployeeFacultyId");
+
+                    b.Property<int?>("EmployeeId");
+
+                    b.Property<int?>("EmployeeMajorId");
+
+                    b.Property<int?>("EmployeeUniversityId");
+
                     b.Property<int?>("GroupAssetGroupId");
 
                     b.Property<int>("IsActive");
 
                     b.Property<int>("IsDelete");
+
+                    b.Property<int?>("LocationId");
 
                     b.Property<string>("Model");
 
@@ -137,6 +147,8 @@ namespace ASSET.Data.Migrations
                     b.Property<string>("NameThai");
 
                     b.Property<string>("OldCode");
+
+                    b.Property<int?>("OwnershipId");
 
                     b.Property<string>("SerialNo");
 
@@ -152,9 +164,31 @@ namespace ASSET.Data.Migrations
 
                     b.HasKey("AssetDetailId");
 
+                    b.HasIndex("AssetDepreciationId")
+                        .IsUnique()
+                        .HasFilter("[AssetDepreciationId] IS NOT NULL");
+
+                    b.HasIndex("AssetWarrantyId")
+                        .IsUnique()
+                        .HasFilter("[AssetWarrantyId] IS NOT NULL");
+
+                    b.HasIndex("EmployeeFacultyId");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.HasIndex("EmployeeMajorId");
+
+                    b.HasIndex("EmployeeUniversityId");
+
                     b.HasIndex("GroupAssetGroupId")
                         .IsUnique()
                         .HasFilter("[GroupAssetGroupId] IS NOT NULL");
+
+                    b.HasIndex("LocationId");
+
+                    b.HasIndex("OwnershipId")
+                        .IsUnique()
+                        .HasFilter("[OwnershipId] IS NOT NULL");
 
                     b.HasIndex("TypeAssetTypeId")
                         .IsUnique()
@@ -194,41 +228,6 @@ namespace ASSET.Data.Migrations
                     b.HasKey("AssetGroupId");
 
                     b.ToTable("AssetGroup");
-                });
-
-            modelBuilder.Entity("ASSET.Models.Master.AssetMaster", b =>
-                {
-                    b.Property<int>("AssetMasterId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int?>("AssetDepreciationId");
-
-                    b.Property<int?>("AssetDetailId");
-
-                    b.Property<int?>("AssetWarrantyId");
-
-                    b.Property<string>("CreateBy")
-                        .IsRequired();
-
-                    b.Property<DateTime?>("CreateDate");
-
-                    b.Property<int>("IsActive");
-
-                    b.Property<int>("IsDelete");
-
-                    b.Property<string>("UpdateBy");
-
-                    b.Property<DateTime?>("UpdateDate");
-
-                    b.HasKey("AssetMasterId");
-
-                    b.HasIndex("AssetDepreciationId");
-
-                    b.HasIndex("AssetDetailId");
-
-                    b.HasIndex("AssetWarrantyId");
-
-                    b.ToTable("AssetMaster");
                 });
 
             modelBuilder.Entity("ASSET.Models.Master.AssetType", b =>
@@ -505,6 +504,117 @@ namespace ASSET.Data.Migrations
                     b.ToTable("EmployeeUniversity");
                 });
 
+            modelBuilder.Entity("ASSET.Models.Master.Location", b =>
+                {
+                    b.Property<int>("LocationId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Barcode");
+
+                    b.Property<string>("Code");
+
+                    b.Property<string>("CreateBy")
+                        .IsRequired();
+
+                    b.Property<DateTime?>("CreateDate");
+
+                    b.Property<int>("IsActive");
+
+                    b.Property<int>("IsDelete");
+
+                    b.Property<int?>("LocationGroupId");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("UpdateBy");
+
+                    b.Property<DateTime?>("UpdateDate");
+
+                    b.HasKey("LocationId");
+
+                    b.HasIndex("LocationGroupId")
+                        .IsUnique()
+                        .HasFilter("[LocationGroupId] IS NOT NULL");
+
+                    b.ToTable("Location");
+                });
+
+            modelBuilder.Entity("ASSET.Models.Master.LocationGroup", b =>
+                {
+                    b.Property<int>("LocationGroupId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Barcode");
+
+                    b.Property<string>("Code");
+
+                    b.Property<string>("CreateBy")
+                        .IsRequired();
+
+                    b.Property<DateTime?>("CreateDate");
+
+                    b.Property<int>("IsActive");
+
+                    b.Property<int>("IsDelete");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("UpdateBy");
+
+                    b.Property<DateTime?>("UpdateDate");
+
+                    b.HasKey("LocationGroupId");
+
+                    b.ToTable("LocationGroup");
+                });
+
+            modelBuilder.Entity("ASSET.Models.Master.Ownership", b =>
+                {
+                    b.Property<int>("OwnershipId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CreateBy")
+                        .IsRequired();
+
+                    b.Property<DateTime?>("CreateDate");
+
+                    b.Property<int?>("EmployeeFacultyId");
+
+                    b.Property<int?>("EmployeeId");
+
+                    b.Property<int?>("EmployeeMajorId");
+
+                    b.Property<int?>("EmployeeUniversityId");
+
+                    b.Property<int>("IsActive");
+
+                    b.Property<int>("IsDelete");
+
+                    b.Property<string>("UpdateBy");
+
+                    b.Property<DateTime?>("UpdateDate");
+
+                    b.HasKey("OwnershipId");
+
+                    b.HasIndex("EmployeeFacultyId")
+                        .IsUnique()
+                        .HasFilter("[EmployeeFacultyId] IS NOT NULL");
+
+                    b.HasIndex("EmployeeId")
+                        .IsUnique()
+                        .HasFilter("[EmployeeId] IS NOT NULL");
+
+                    b.HasIndex("EmployeeMajorId")
+                        .IsUnique()
+                        .HasFilter("[EmployeeMajorId] IS NOT NULL");
+
+                    b.HasIndex("EmployeeUniversityId")
+                        .IsUnique()
+                        .HasFilter("[EmployeeUniversityId] IS NOT NULL");
+
+                    b.ToTable("Ownership");
+                });
+
             modelBuilder.Entity("ASSET.Models.Master.Supplier", b =>
                 {
                     b.Property<int>("SupplierId")
@@ -531,13 +641,46 @@ namespace ASSET.Data.Migrations
 
                     b.Property<string>("Name");
 
+                    b.Property<int?>("SupplierGroupId");
+
                     b.Property<string>("UpdateBy");
 
                     b.Property<DateTime?>("UpdateDate");
 
                     b.HasKey("SupplierId");
 
+                    b.HasIndex("SupplierGroupId")
+                        .IsUnique()
+                        .HasFilter("[SupplierGroupId] IS NOT NULL");
+
                     b.ToTable("Supplier");
+                });
+
+            modelBuilder.Entity("ASSET.Models.Master.SupplierGroup", b =>
+                {
+                    b.Property<int>("SupplierGroupId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Code");
+
+                    b.Property<string>("CreateBy")
+                        .IsRequired();
+
+                    b.Property<DateTime?>("CreateDate");
+
+                    b.Property<int>("IsActive");
+
+                    b.Property<int>("IsDelete");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("UpdateBy");
+
+                    b.Property<DateTime?>("UpdateDate");
+
+                    b.HasKey("SupplierGroupId");
+
+                    b.ToTable("SupplierGroup");
                 });
 
             modelBuilder.Entity("ASSET.Models.Master.AssetCategory", b =>
@@ -547,18 +690,43 @@ namespace ASSET.Data.Migrations
                         .HasForeignKey("ASSET.Models.Master.AssetCategory", "AssetDetailId");
                 });
 
-            modelBuilder.Entity("ASSET.Models.Master.AssetDepreciation", b =>
-                {
-                    b.HasOne("ASSET.Models.Master.AssetDetail", "AssetDetail")
-                        .WithMany()
-                        .HasForeignKey("AssetDetailId");
-                });
-
             modelBuilder.Entity("ASSET.Models.Master.AssetDetail", b =>
                 {
+                    b.HasOne("ASSET.Models.Master.AssetDepreciation", "AssetDepreciation")
+                        .WithOne("AssetDetail")
+                        .HasForeignKey("ASSET.Models.Master.AssetDetail", "AssetDepreciationId");
+
+                    b.HasOne("ASSET.Models.Master.AssetWarranty", "AssetWarranty")
+                        .WithOne("AssetDetail")
+                        .HasForeignKey("ASSET.Models.Master.AssetDetail", "AssetWarrantyId");
+
+                    b.HasOne("ASSET.Models.Master.EmployeeFaculty")
+                        .WithMany("AssetDetail")
+                        .HasForeignKey("EmployeeFacultyId");
+
+                    b.HasOne("ASSET.Models.Master.Employee")
+                        .WithMany("AssetDetail")
+                        .HasForeignKey("EmployeeId");
+
+                    b.HasOne("ASSET.Models.Master.EmployeeMajor")
+                        .WithMany("AssetDetail")
+                        .HasForeignKey("EmployeeMajorId");
+
+                    b.HasOne("ASSET.Models.Master.EmployeeUniversity")
+                        .WithMany("AssetDetail")
+                        .HasForeignKey("EmployeeUniversityId");
+
                     b.HasOne("ASSET.Models.Master.AssetGroup", "Group")
                         .WithOne("AssetDetail")
                         .HasForeignKey("ASSET.Models.Master.AssetDetail", "GroupAssetGroupId");
+
+                    b.HasOne("ASSET.Models.Master.Location", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId");
+
+                    b.HasOne("ASSET.Models.Master.Ownership", "Ownership")
+                        .WithOne("AssetDetail")
+                        .HasForeignKey("ASSET.Models.Master.AssetDetail", "OwnershipId");
 
                     b.HasOne("ASSET.Models.Master.AssetType", "Type")
                         .WithOne("AssetDetail")
@@ -567,21 +735,6 @@ namespace ASSET.Data.Migrations
                     b.HasOne("ASSET.Models.Master.AssetUnit", "Unit")
                         .WithOne("AssetDetail")
                         .HasForeignKey("ASSET.Models.Master.AssetDetail", "UnitAssetUnitId");
-                });
-
-            modelBuilder.Entity("ASSET.Models.Master.AssetMaster", b =>
-                {
-                    b.HasOne("ASSET.Models.Master.AssetDepreciation", "AssetDepreciation")
-                        .WithMany()
-                        .HasForeignKey("AssetDepreciationId");
-
-                    b.HasOne("ASSET.Models.Master.AssetDetail", "AssetDetail")
-                        .WithMany()
-                        .HasForeignKey("AssetDetailId");
-
-                    b.HasOne("ASSET.Models.Master.AssetWarranty", "AssetWarranty")
-                        .WithMany()
-                        .HasForeignKey("AssetWarrantyId");
                 });
 
             modelBuilder.Entity("ASSET.Models.Master.AssetWarranty", b =>
@@ -610,6 +763,39 @@ namespace ASSET.Data.Migrations
                     b.HasOne("ASSET.Models.Master.EmployeeFaculty", "Faculty")
                         .WithMany()
                         .HasForeignKey("FacultyEmployeeFacultyId");
+                });
+
+            modelBuilder.Entity("ASSET.Models.Master.Location", b =>
+                {
+                    b.HasOne("ASSET.Models.Master.LocationGroup", "LocationGroup")
+                        .WithOne("Location")
+                        .HasForeignKey("ASSET.Models.Master.Location", "LocationGroupId");
+                });
+
+            modelBuilder.Entity("ASSET.Models.Master.Ownership", b =>
+                {
+                    b.HasOne("ASSET.Models.Master.EmployeeFaculty", "EmployeeFaculty")
+                        .WithOne("Ownership")
+                        .HasForeignKey("ASSET.Models.Master.Ownership", "EmployeeFacultyId");
+
+                    b.HasOne("ASSET.Models.Master.Employee", "Employee")
+                        .WithOne("Ownership")
+                        .HasForeignKey("ASSET.Models.Master.Ownership", "EmployeeId");
+
+                    b.HasOne("ASSET.Models.Master.EmployeeMajor", "EmployeeMajor")
+                        .WithOne("Ownership")
+                        .HasForeignKey("ASSET.Models.Master.Ownership", "EmployeeMajorId");
+
+                    b.HasOne("ASSET.Models.Master.EmployeeUniversity", "EmployeeUniversity")
+                        .WithOne("Ownership")
+                        .HasForeignKey("ASSET.Models.Master.Ownership", "EmployeeUniversityId");
+                });
+
+            modelBuilder.Entity("ASSET.Models.Master.Supplier", b =>
+                {
+                    b.HasOne("ASSET.Models.Master.SupplierGroup", "SupplierGroup")
+                        .WithOne("Supplier")
+                        .HasForeignKey("ASSET.Models.Master.Supplier", "SupplierGroupId");
                 });
 #pragma warning restore 612, 618
         }

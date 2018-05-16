@@ -16,5 +16,9 @@ namespace ASSET.Models.Master
         public string Name { get; set; }
 
 		public virtual Employee Employee { get; set; }
+
+		public virtual ICollection<AssetDetail> AssetDetail { get; set; }
+
+		public virtual Ownership Ownership { get; set; }
 	}
 }

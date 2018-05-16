@@ -29,6 +29,12 @@ namespace ASSET.Models.Master
 		public string Brand { get; set; }
 		public string Model { get; set; }
 		public string SerialNo { get; set; }
-		
+
+		public virtual Location Location { get; set; }
+		public virtual Ownership Ownership { get; set; }
+
+		public AssetWarranty AssetWarranty { get; set; }
+		public AssetDepreciation AssetDepreciation { get; set; }
+
 	}
 }

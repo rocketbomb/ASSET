@@ -18,6 +18,6 @@ namespace ASSET.Models.Master
         public string ContactPerson { get; set; }
         public string Email { get; set; }
 
-
+		public SupplierGroup SupplierGroup { get; set; }
 	}
 }
