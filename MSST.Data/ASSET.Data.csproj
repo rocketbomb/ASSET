@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20180516055550_Update8.cs" />
-    <Compile Remove="Migrations\20180516060015_Update8.cs" />
+    <Compile Remove="Migrations\20180516063945_Update1.cs" />
+    <Compile Remove="Migrations\20180516071139_Update1.cs" />
   </ItemGroup>
 
   <ItemGroup>

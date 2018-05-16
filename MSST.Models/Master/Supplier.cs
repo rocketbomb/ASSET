@@ -8,7 +8,7 @@ namespace ASSET.Models.Master
 	{
 		public Supplier()
 		{
-			
+			//CommonTable = new HashSet<Base>();
 		}
 
 		public int SupplierId { get; set; }
@@ -18,6 +18,8 @@ namespace ASSET.Models.Master
         public string ContactNumber { get; set; }
         public string ContactPerson { get; set; }
         public string Email { get; set; }
+
+		//public virtual ICollection<Base> CommonTable { get; set; }
 
 	}
 }

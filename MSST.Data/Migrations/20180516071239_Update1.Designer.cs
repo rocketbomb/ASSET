@@ -12,8 +12,8 @@ using System;
 namespace ASSET.Data.Migrations
 {
     [DbContext(typeof(ASSETContext))]
-    [Migration("20180516055130_Update7")]
-    partial class Update7
+    [Migration("20180516071239_Update1")]
+    partial class Update1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,7 +31,8 @@ namespace ASSET.Data.Migrations
 
                     b.Property<int?>("AssetWarrantyCompanyBaseId");
 
-                    b.Property<string>("CreateBy");
+                    b.Property<string>("CreateBy")
+                        .IsRequired();
 
                     b.Property<DateTime?>("CreateDate");
 

@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.EntityFrameworkCore.Storage.Internal;
 using Microsoft.EntityFrameworkCore.ValueGeneration;
 using System;
 
@@ -28,7 +30,8 @@ namespace ASSET.Data.Migrations
 
                     b.Property<int?>("AssetWarrantyCompanyBaseId");
 
-                    b.Property<string>("CreateBy");
+                    b.Property<string>("CreateBy")
+                        .IsRequired();
 
                     b.Property<DateTime?>("CreateDate");
 

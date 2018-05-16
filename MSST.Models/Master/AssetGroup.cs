@@ -6,7 +6,10 @@ namespace ASSET.Models.Master
 {
     public class AssetGroup : Base
 	{
-		
+		public AssetGroup()
+		{
+
+		}
 
 		public int AssetGroupId { get; set; }
         public string Code { get; set; }
