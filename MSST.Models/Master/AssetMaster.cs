@@ -14,7 +14,8 @@ namespace ASSET.Models.Master
 
 		public int AssetMasterId { get; set; }
 		public AssetDetail AssetDetail { get; set; }
-        public virtual AssetWarranty AssetWarranty { get; set; }
+        public AssetWarranty AssetWarranty { get; set; }
+		public AssetDepreciation AssetDepreciation { get; set; }
 
 
 	}

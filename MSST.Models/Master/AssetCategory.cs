@@ -7,10 +7,7 @@ namespace ASSET.Models.Master
 {
 	public class AssetCategory : Base
 	{
-		public AssetCategory()
-		{
-			//CommonTable = new HashSet<Base>();
-		}
+	
 
 
 		public int AssetCategoryId { get; set; }

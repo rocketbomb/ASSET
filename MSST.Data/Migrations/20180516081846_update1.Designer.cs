@@ -11,9 +11,10 @@ using System;
 namespace ASSET.Data.Migrations
 {
     [DbContext(typeof(ASSETContext))]
-    partial class ASSETContextModelSnapshot : ModelSnapshot
+    [Migration("20180516081846_update1")]
+    partial class update1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,59 +52,6 @@ namespace ASSET.Data.Migrations
                         .HasFilter("[AssetDetailId] IS NOT NULL");
 
                     b.ToTable("AssetCategory");
-                });
-
-            modelBuilder.Entity("ASSET.Models.Master.AssetDepreciation", b =>
-                {
-                    b.Property<int>("AssetDepreciationId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<double>("AssetAge");
-
-                    b.Property<int?>("AssetDetailId");
-
-                    b.Property<double>("CalculatePrice");
-
-                    b.Property<double>("Cost");
-
-                    b.Property<string>("CreateBy")
-                        .IsRequired();
-
-                    b.Property<DateTime?>("CreateDate");
-
-                    b.Property<double>("DayOffCalculate");
-
-                    b.Property<double>("DepreciateOpen");
-
-                    b.Property<double>("DepreciatePerDay");
-
-                    b.Property<double>("DepreciateRatio");
-
-                    b.Property<DateTime>("EndDate");
-
-                    b.Property<int>("IsActive");
-
-                    b.Property<int>("IsDelete");
-
-                    b.Property<DateTime>("PurchaseDate");
-
-                    b.Property<double>("RemainPrice");
-
-                    b.Property<double>("Remark");
-
-                    b.Property<DateTime>("StartDate");
-
-                    b.Property<string>("UpdateBy");
-
-                    b.Property<DateTime?>("UpdateDate");
-
-                    b.Property<double>("UsefulLife");
-
-                    b.HasKey("AssetDepreciationId");
-
-                    b.HasIndex("AssetDetailId");
-
-                    b.ToTable("AssetDepreciation");
                 });
 
             modelBuilder.Entity("ASSET.Models.Master.AssetDetail", b =>
@@ -201,8 +149,6 @@ namespace ASSET.Data.Migrations
                     b.Property<int>("AssetMasterId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("AssetDepreciationId");
-
                     b.Property<int?>("AssetDetailId");
 
                     b.Property<int?>("AssetWarrantyId");
@@ -221,8 +167,6 @@ namespace ASSET.Data.Migrations
                     b.Property<DateTime?>("UpdateDate");
 
                     b.HasKey("AssetMasterId");
-
-                    b.HasIndex("AssetDepreciationId");
 
                     b.HasIndex("AssetDetailId");
 
@@ -547,13 +491,6 @@ namespace ASSET.Data.Migrations
                         .HasForeignKey("ASSET.Models.Master.AssetCategory", "AssetDetailId");
                 });
 
-            modelBuilder.Entity("ASSET.Models.Master.AssetDepreciation", b =>
-                {
-                    b.HasOne("ASSET.Models.Master.AssetDetail", "AssetDetail")
-                        .WithMany()
-                        .HasForeignKey("AssetDetailId");
-                });
-
             modelBuilder.Entity("ASSET.Models.Master.AssetDetail", b =>
                 {
                     b.HasOne("ASSET.Models.Master.AssetGroup", "Group")
@@ -571,10 +508,6 @@ namespace ASSET.Data.Migrations
 
             modelBuilder.Entity("ASSET.Models.Master.AssetMaster", b =>
                 {
-                    b.HasOne("ASSET.Models.Master.AssetDepreciation", "AssetDepreciation")
-                        .WithMany()
-                        .HasForeignKey("AssetDepreciationId");
-
                     b.HasOne("ASSET.Models.Master.AssetDetail", "AssetDetail")
                         .WithMany()
                         .HasForeignKey("AssetDetailId");

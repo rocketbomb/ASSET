@@ -11,7 +11,7 @@ namespace ASSET.Common
 			CreateBy = "System";
 		}
 
-		public int BaseId { get; set; }
+		//public int BaseId { get; set; }
 
 		[Required]
 		public string CreateBy { get; set; }

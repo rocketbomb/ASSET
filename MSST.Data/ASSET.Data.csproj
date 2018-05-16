@@ -9,6 +9,7 @@
   <ItemGroup>
     <Compile Remove="Migrations\20180516063945_Update1.cs" />
     <Compile Remove="Migrations\20180516071139_Update1.cs" />
+    <Compile Remove="Migrations\20180516074334_Update2.cs" />
   </ItemGroup>
 
   <ItemGroup>

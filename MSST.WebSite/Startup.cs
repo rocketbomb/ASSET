@@ -28,7 +28,8 @@ namespace ASSET.WebSite
             //services.AddDbContext<ASSETContext>(options => options.UseSqlServer(connection));
 			//services.AddDbContext<ASSETContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Development"), x => x.MigrationsAssembly("ASSET.Data")));
 
-			services.AddDbContext<ASSETContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Development"), b => b.MigrationsAssembly("ASSET.Data")));
+			//services.AddDbContext<ASSETContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Development"), b => b.MigrationsAssembly("ASSET.Data")));
+			services.AddDbContext<ASSETContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Development")));
 		}
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -11,8 +11,6 @@ namespace ASSET.Models.Master
 			
 		}
 
-		public virtual ICollection<Base> Common { get; set; }
-
 		public int AssetWarrantyCompanyId { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
