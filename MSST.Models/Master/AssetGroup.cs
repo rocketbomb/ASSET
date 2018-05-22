@@ -17,6 +17,6 @@ namespace ASSET.Models.Master
 		public string AssetId { get; set; }
 
 
-		public virtual AssetDetail AssetDetail { get; set; }
+		public virtual Asset Asset { get; set; }
 	}
 }

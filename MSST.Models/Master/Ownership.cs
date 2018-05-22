@@ -11,7 +11,7 @@ namespace ASSET.Models.Master
 		}
 
 		public int OwnershipId { get; set; }
-		public virtual AssetDetail AssetDetail { get; set; }
+		public virtual Asset Asset { get; set; }
 		public virtual Employee Employee { get; set; }
 		public virtual EmployeeMajor EmployeeMajor { get; set; }
 		public virtual EmployeeFaculty EmployeeFaculty { get; set; }

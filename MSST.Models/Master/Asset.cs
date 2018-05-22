@@ -4,14 +4,14 @@ using ASSET.Common;
 
 namespace ASSET.Models.Master
 {
-	public class AssetDetail : Base
+	public class Asset : Base
 	{
-		public AssetDetail()
+		public Asset()
 		{
 
 		}
 
-		public int AssetDetailId { get; set; }
+		public int AssetId { get; set; }
 		public string Code { get; set; }
 		public string Barcode { get; set; }
 		public string NameThai { get; set; }

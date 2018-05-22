@@ -415,10 +415,10 @@ namespace ASSET.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AssetDetail",
+                name: "Asset",
                 columns: table => new
                 {
-                    AssetDetailId = table.Column<int>(nullable: false)
+                    AssetId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     AssetDepreciationId = table.Column<int>(nullable: true),
                     AssetWarrantyId = table.Column<int>(nullable: true),
@@ -450,69 +450,69 @@ namespace ASSET.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AssetDetail", x => x.AssetDetailId);
+                    table.PrimaryKey("PK_Asset", x => x.AssetId);
                     table.ForeignKey(
-                        name: "FK_AssetDetail_AssetDepreciation_AssetDepreciationId",
+                        name: "FK_Asset_AssetDepreciation_AssetDepreciationId",
                         column: x => x.AssetDepreciationId,
                         principalTable: "AssetDepreciation",
                         principalColumn: "AssetDepreciationId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_AssetDetail_AssetWarranty_AssetWarrantyId",
+                        name: "FK_Asset_AssetWarranty_AssetWarrantyId",
                         column: x => x.AssetWarrantyId,
                         principalTable: "AssetWarranty",
                         principalColumn: "AssetWarrantyId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_AssetDetail_EmployeeFaculty_EmployeeFacultyId",
+                        name: "FK_Asset_EmployeeFaculty_EmployeeFacultyId",
                         column: x => x.EmployeeFacultyId,
                         principalTable: "EmployeeFaculty",
                         principalColumn: "EmployeeFacultyId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_AssetDetail_Employee_EmployeeId",
+                        name: "FK_Asset_Employee_EmployeeId",
                         column: x => x.EmployeeId,
                         principalTable: "Employee",
                         principalColumn: "EmployeeId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_AssetDetail_EmployeeMajor_EmployeeMajorId",
+                        name: "FK_Asset_EmployeeMajor_EmployeeMajorId",
                         column: x => x.EmployeeMajorId,
                         principalTable: "EmployeeMajor",
                         principalColumn: "EmployeeMajorId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_AssetDetail_EmployeeUniversity_EmployeeUniversityId",
+                        name: "FK_Asset_EmployeeUniversity_EmployeeUniversityId",
                         column: x => x.EmployeeUniversityId,
                         principalTable: "EmployeeUniversity",
                         principalColumn: "EmployeeUniversityId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_AssetDetail_AssetGroup_GroupAssetGroupId",
+                        name: "FK_Asset_AssetGroup_GroupAssetGroupId",
                         column: x => x.GroupAssetGroupId,
                         principalTable: "AssetGroup",
                         principalColumn: "AssetGroupId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_AssetDetail_Location_LocationId",
+                        name: "FK_Asset_Location_LocationId",
                         column: x => x.LocationId,
                         principalTable: "Location",
                         principalColumn: "LocationId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_AssetDetail_Ownership_OwnershipId",
+                        name: "FK_Asset_Ownership_OwnershipId",
                         column: x => x.OwnershipId,
                         principalTable: "Ownership",
                         principalColumn: "OwnershipId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_AssetDetail_AssetType_TypeAssetTypeId",
+                        name: "FK_Asset_AssetType_TypeAssetTypeId",
                         column: x => x.TypeAssetTypeId,
                         principalTable: "AssetType",
                         principalColumn: "AssetTypeId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_AssetDetail_AssetUnit_UnitAssetUnitId",
+                        name: "FK_Asset_AssetUnit_UnitAssetUnitId",
                         column: x => x.UnitAssetUnitId,
                         principalTable: "AssetUnit",
                         principalColumn: "AssetUnitId",
@@ -525,7 +525,7 @@ namespace ASSET.Data.Migrations
                 {
                     AssetCategoryId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    AssetDetailId = table.Column<int>(nullable: true),
+                    AssetId = table.Column<int>(nullable: true),
                     Code = table.Column<string>(nullable: true),
                     CreateBy = table.Column<string>(nullable: false),
                     CreateDate = table.Column<DateTime>(nullable: true),
@@ -539,83 +539,83 @@ namespace ASSET.Data.Migrations
                 {
                     table.PrimaryKey("PK_AssetCategory", x => x.AssetCategoryId);
                     table.ForeignKey(
-                        name: "FK_AssetCategory_AssetDetail_AssetDetailId",
-                        column: x => x.AssetDetailId,
-                        principalTable: "AssetDetail",
-                        principalColumn: "AssetDetailId",
+                        name: "FK_AssetCategory_Asset_AssetId",
+                        column: x => x.AssetId,
+                        principalTable: "Asset",
+                        principalColumn: "AssetId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AssetCategory_AssetDetailId",
+                name: "IX_AssetCategory_AssetId",
                 table: "AssetCategory",
-                column: "AssetDetailId",
+                column: "AssetId",
                 unique: true,
-                filter: "[AssetDetailId] IS NOT NULL");
+                filter: "[AssetId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AssetDetail_AssetDepreciationId",
-                table: "AssetDetail",
+                name: "IX_Asset_AssetDepreciationId",
+                table: "Asset",
                 column: "AssetDepreciationId",
                 unique: true,
                 filter: "[AssetDepreciationId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AssetDetail_AssetWarrantyId",
-                table: "AssetDetail",
+                name: "IX_Asset_AssetWarrantyId",
+                table: "Asset",
                 column: "AssetWarrantyId",
                 unique: true,
                 filter: "[AssetWarrantyId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AssetDetail_EmployeeFacultyId",
-                table: "AssetDetail",
+                name: "IX_Asset_EmployeeFacultyId",
+                table: "Asset",
                 column: "EmployeeFacultyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AssetDetail_EmployeeId",
-                table: "AssetDetail",
+                name: "IX_Asset_EmployeeId",
+                table: "Asset",
                 column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AssetDetail_EmployeeMajorId",
-                table: "AssetDetail",
+                name: "IX_Asset_EmployeeMajorId",
+                table: "Asset",
                 column: "EmployeeMajorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AssetDetail_EmployeeUniversityId",
-                table: "AssetDetail",
+                name: "IX_Asset_EmployeeUniversityId",
+                table: "Asset",
                 column: "EmployeeUniversityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AssetDetail_GroupAssetGroupId",
-                table: "AssetDetail",
+                name: "IX_Asset_GroupAssetGroupId",
+                table: "Asset",
                 column: "GroupAssetGroupId",
                 unique: true,
                 filter: "[GroupAssetGroupId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AssetDetail_LocationId",
-                table: "AssetDetail",
+                name: "IX_Asset_LocationId",
+                table: "Asset",
                 column: "LocationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AssetDetail_OwnershipId",
-                table: "AssetDetail",
+                name: "IX_Asset_OwnershipId",
+                table: "Asset",
                 column: "OwnershipId",
                 unique: true,
                 filter: "[OwnershipId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AssetDetail_TypeAssetTypeId",
-                table: "AssetDetail",
+                name: "IX_Asset_TypeAssetTypeId",
+                table: "Asset",
                 column: "TypeAssetTypeId",
                 unique: true,
                 filter: "[TypeAssetTypeId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AssetDetail_UnitAssetUnitId",
-                table: "AssetDetail",
+                name: "IX_Asset_UnitAssetUnitId",
+                table: "Asset",
                 column: "UnitAssetUnitId",
                 unique: true,
                 filter: "[UnitAssetUnitId] IS NOT NULL");
@@ -696,7 +696,7 @@ namespace ASSET.Data.Migrations
                 name: "Supplier");
 
             migrationBuilder.DropTable(
-                name: "AssetDetail");
+                name: "Asset");
 
             migrationBuilder.DropTable(
                 name: "SupplierGroup");

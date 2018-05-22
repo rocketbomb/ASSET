@@ -23,7 +23,7 @@ namespace ASSET.Models.Master
 		public double DepreciatePerDay { get; set; }
 		public double Remark { get; set; }
 
-		public virtual AssetDetail AssetDetail { get; set; }
+		public virtual Asset Asset { get; set; }
 		
 	}
 }

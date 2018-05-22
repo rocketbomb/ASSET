@@ -25,7 +25,7 @@ namespace ASSET.Data.Migrations
                     b.Property<int>("AssetCategoryId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("AssetDetailId");
+                    b.Property<int?>("AssetId");
 
                     b.Property<string>("Code");
 
@@ -46,9 +46,9 @@ namespace ASSET.Data.Migrations
 
                     b.HasKey("AssetCategoryId");
 
-                    b.HasIndex("AssetDetailId")
+                    b.HasIndex("AssetId")
                         .IsUnique()
-                        .HasFilter("[AssetDetailId] IS NOT NULL");
+                        .HasFilter("[AssetId] IS NOT NULL");
 
                     b.ToTable("AssetCategory");
                 });
@@ -102,9 +102,9 @@ namespace ASSET.Data.Migrations
                     b.ToTable("AssetDepreciation");
                 });
 
-            modelBuilder.Entity("ASSET.Models.Master.AssetDetail", b =>
+            modelBuilder.Entity("ASSET.Models.Master.Asset", b =>
                 {
-                    b.Property<int>("AssetDetailId")
+                    b.Property<int>("AssetId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int?>("AssetDepreciationId");
@@ -162,7 +162,7 @@ namespace ASSET.Data.Migrations
 
                     b.Property<DateTime?>("UpdateDate");
 
-                    b.HasKey("AssetDetailId");
+                    b.HasKey("AssetId");
 
                     b.HasIndex("AssetDepreciationId")
                         .IsUnique()
@@ -198,7 +198,7 @@ namespace ASSET.Data.Migrations
                         .IsUnique()
                         .HasFilter("[UnitAssetUnitId] IS NOT NULL");
 
-                    b.ToTable("AssetDetail");
+                    b.ToTable("Asset");
                 });
 
             modelBuilder.Entity("ASSET.Models.Master.AssetGroup", b =>
@@ -685,56 +685,56 @@ namespace ASSET.Data.Migrations
 
             modelBuilder.Entity("ASSET.Models.Master.AssetCategory", b =>
                 {
-                    b.HasOne("ASSET.Models.Master.AssetDetail", "AssetDetail")
+                    b.HasOne("ASSET.Models.Master.Asset", "Asset")
                         .WithOne("Category")
-                        .HasForeignKey("ASSET.Models.Master.AssetCategory", "AssetDetailId");
+                        .HasForeignKey("ASSET.Models.Master.AssetCategory", "AssetId");
                 });
 
-            modelBuilder.Entity("ASSET.Models.Master.AssetDetail", b =>
+            modelBuilder.Entity("ASSET.Models.Master.Asset", b =>
                 {
                     b.HasOne("ASSET.Models.Master.AssetDepreciation", "AssetDepreciation")
-                        .WithOne("AssetDetail")
-                        .HasForeignKey("ASSET.Models.Master.AssetDetail", "AssetDepreciationId");
+                        .WithOne("Asset")
+                        .HasForeignKey("ASSET.Models.Master.Asset", "AssetDepreciationId");
 
                     b.HasOne("ASSET.Models.Master.AssetWarranty", "AssetWarranty")
-                        .WithOne("AssetDetail")
-                        .HasForeignKey("ASSET.Models.Master.AssetDetail", "AssetWarrantyId");
+                        .WithOne("Asset")
+                        .HasForeignKey("ASSET.Models.Master.Asset", "AssetWarrantyId");
 
                     b.HasOne("ASSET.Models.Master.EmployeeFaculty")
-                        .WithMany("AssetDetail")
+                        .WithMany("Asset")
                         .HasForeignKey("EmployeeFacultyId");
 
                     b.HasOne("ASSET.Models.Master.Employee")
-                        .WithMany("AssetDetail")
+                        .WithMany("Asset")
                         .HasForeignKey("EmployeeId");
 
                     b.HasOne("ASSET.Models.Master.EmployeeMajor")
-                        .WithMany("AssetDetail")
+                        .WithMany("Asset")
                         .HasForeignKey("EmployeeMajorId");
 
                     b.HasOne("ASSET.Models.Master.EmployeeUniversity")
-                        .WithMany("AssetDetail")
+                        .WithMany("Asset")
                         .HasForeignKey("EmployeeUniversityId");
 
                     b.HasOne("ASSET.Models.Master.AssetGroup", "Group")
-                        .WithOne("AssetDetail")
-                        .HasForeignKey("ASSET.Models.Master.AssetDetail", "GroupAssetGroupId");
+                        .WithOne("Asset")
+                        .HasForeignKey("ASSET.Models.Master.Asset", "GroupAssetGroupId");
 
                     b.HasOne("ASSET.Models.Master.Location", "Location")
                         .WithMany()
                         .HasForeignKey("LocationId");
 
                     b.HasOne("ASSET.Models.Master.Ownership", "Ownership")
-                        .WithOne("AssetDetail")
-                        .HasForeignKey("ASSET.Models.Master.AssetDetail", "OwnershipId");
+                        .WithOne("Asset")
+                        .HasForeignKey("ASSET.Models.Master.Asset", "OwnershipId");
 
                     b.HasOne("ASSET.Models.Master.AssetType", "Type")
-                        .WithOne("AssetDetail")
-                        .HasForeignKey("ASSET.Models.Master.AssetDetail", "TypeAssetTypeId");
+                        .WithOne("Asset")
+                        .HasForeignKey("ASSET.Models.Master.Asset", "TypeAssetTypeId");
 
                     b.HasOne("ASSET.Models.Master.AssetUnit", "Unit")
-                        .WithOne("AssetDetail")
-                        .HasForeignKey("ASSET.Models.Master.AssetDetail", "UnitAssetUnitId");
+                        .WithOne("Asset")
+                        .HasForeignKey("ASSET.Models.Master.Asset", "UnitAssetUnitId");
                 });
 
             modelBuilder.Entity("ASSET.Models.Master.AssetWarranty", b =>
