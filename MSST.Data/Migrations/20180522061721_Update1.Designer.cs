@@ -11,8 +11,8 @@ using System;
 namespace ASSET.Data.Migrations
 {
     [DbContext(typeof(ASSETContext))]
-    [Migration("20180516102515_update1")]
-    partial class update1
+    [Migration("20180522061721_Update1")]
+    partial class Update1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,88 +20,6 @@ namespace ASSET.Data.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.0.3-rtm-10026")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("ASSET.Models.Master.AssetCategory", b =>
-                {
-                    b.Property<int>("AssetCategoryId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int?>("AssetId");
-
-                    b.Property<string>("Code");
-
-                    b.Property<string>("CreateBy")
-                        .IsRequired();
-
-                    b.Property<DateTime?>("CreateDate");
-
-                    b.Property<int>("IsActive");
-
-                    b.Property<int>("IsDelete");
-
-                    b.Property<string>("Name");
-
-                    b.Property<string>("UpdateBy");
-
-                    b.Property<DateTime?>("UpdateDate");
-
-                    b.HasKey("AssetCategoryId");
-
-                    b.HasIndex("AssetId")
-                        .IsUnique()
-                        .HasFilter("[AssetId] IS NOT NULL");
-
-                    b.ToTable("AssetCategory");
-                });
-
-            modelBuilder.Entity("ASSET.Models.Master.AssetDepreciation", b =>
-                {
-                    b.Property<int>("AssetDepreciationId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<double>("AssetAge");
-
-                    b.Property<double>("CalculatePrice");
-
-                    b.Property<double>("Cost");
-
-                    b.Property<string>("CreateBy")
-                        .IsRequired();
-
-                    b.Property<DateTime?>("CreateDate");
-
-                    b.Property<double>("DayOffCalculate");
-
-                    b.Property<double>("DepreciateOpen");
-
-                    b.Property<double>("DepreciatePerDay");
-
-                    b.Property<double>("DepreciateRatio");
-
-                    b.Property<DateTime>("EndDate");
-
-                    b.Property<int>("IsActive");
-
-                    b.Property<int>("IsDelete");
-
-                    b.Property<DateTime>("PurchaseDate");
-
-                    b.Property<double>("RemainPrice");
-
-                    b.Property<double>("Remark");
-
-                    b.Property<DateTime>("StartDate");
-
-                    b.Property<string>("UpdateBy");
-
-                    b.Property<DateTime?>("UpdateDate");
-
-                    b.Property<double>("UsefulLife");
-
-                    b.HasKey("AssetDepreciationId");
-
-                    b.ToTable("AssetDepreciation");
-                });
 
             modelBuilder.Entity("ASSET.Models.Master.Asset", b =>
                 {
@@ -115,6 +33,8 @@ namespace ASSET.Data.Migrations
                     b.Property<string>("Barcode");
 
                     b.Property<string>("Brand");
+
+                    b.Property<int?>("CategoryAssetCategoryId");
 
                     b.Property<string>("Code");
 
@@ -173,6 +93,10 @@ namespace ASSET.Data.Migrations
                         .IsUnique()
                         .HasFilter("[AssetWarrantyId] IS NOT NULL");
 
+                    b.HasIndex("CategoryAssetCategoryId")
+                        .IsUnique()
+                        .HasFilter("[CategoryAssetCategoryId] IS NOT NULL");
+
                     b.HasIndex("EmployeeFacultyId");
 
                     b.HasIndex("EmployeeId");
@@ -200,6 +124,82 @@ namespace ASSET.Data.Migrations
                         .HasFilter("[UnitAssetUnitId] IS NOT NULL");
 
                     b.ToTable("Asset");
+                });
+
+            modelBuilder.Entity("ASSET.Models.Master.AssetCategory", b =>
+                {
+                    b.Property<int>("AssetCategoryId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Code");
+
+                    b.Property<string>("CreateBy")
+                        .IsRequired();
+
+                    b.Property<DateTime?>("CreateDate");
+
+                    b.Property<int>("IsActive");
+
+                    b.Property<int>("IsDelete");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("UpdateBy");
+
+                    b.Property<DateTime?>("UpdateDate");
+
+                    b.HasKey("AssetCategoryId");
+
+                    b.ToTable("AssetCategory");
+                });
+
+            modelBuilder.Entity("ASSET.Models.Master.AssetDepreciation", b =>
+                {
+                    b.Property<int>("AssetDepreciationId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<double>("AssetAge");
+
+                    b.Property<double>("CalculatePrice");
+
+                    b.Property<double>("Cost");
+
+                    b.Property<string>("CreateBy")
+                        .IsRequired();
+
+                    b.Property<DateTime?>("CreateDate");
+
+                    b.Property<double>("DayOffCalculate");
+
+                    b.Property<double>("DepreciateOpen");
+
+                    b.Property<double>("DepreciatePerDay");
+
+                    b.Property<double>("DepreciateRatio");
+
+                    b.Property<DateTime>("EndDate");
+
+                    b.Property<int>("IsActive");
+
+                    b.Property<int>("IsDelete");
+
+                    b.Property<DateTime>("PurchaseDate");
+
+                    b.Property<double>("RemainPrice");
+
+                    b.Property<double>("Remark");
+
+                    b.Property<DateTime>("StartDate");
+
+                    b.Property<string>("UpdateBy");
+
+                    b.Property<DateTime?>("UpdateDate");
+
+                    b.Property<double>("UsefulLife");
+
+                    b.HasKey("AssetDepreciationId");
+
+                    b.ToTable("AssetDepreciation");
                 });
 
             modelBuilder.Entity("ASSET.Models.Master.AssetGroup", b =>
@@ -684,13 +684,6 @@ namespace ASSET.Data.Migrations
                     b.ToTable("SupplierGroup");
                 });
 
-            modelBuilder.Entity("ASSET.Models.Master.AssetCategory", b =>
-                {
-                    b.HasOne("ASSET.Models.Master.Asset", "Asset")
-                        .WithOne("Category")
-                        .HasForeignKey("ASSET.Models.Master.AssetCategory", "AssetId");
-                });
-
             modelBuilder.Entity("ASSET.Models.Master.Asset", b =>
                 {
                     b.HasOne("ASSET.Models.Master.AssetDepreciation", "AssetDepreciation")
@@ -700,6 +693,10 @@ namespace ASSET.Data.Migrations
                     b.HasOne("ASSET.Models.Master.AssetWarranty", "AssetWarranty")
                         .WithOne("Asset")
                         .HasForeignKey("ASSET.Models.Master.Asset", "AssetWarrantyId");
+
+                    b.HasOne("ASSET.Models.Master.AssetCategory", "Category")
+                        .WithOne("Asset")
+                        .HasForeignKey("ASSET.Models.Master.Asset", "CategoryAssetCategoryId");
 
                     b.HasOne("ASSET.Models.Master.EmployeeFaculty")
                         .WithMany("Asset")

@@ -5,10 +5,30 @@ using System.Collections.Generic;
 
 namespace ASSET.Data.Migrations
 {
-    public partial class update1 : Migration
+    public partial class Update1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "AssetCategory",
+                columns: table => new
+                {
+                    AssetCategoryId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Code = table.Column<string>(nullable: true),
+                    CreateBy = table.Column<string>(nullable: false),
+                    CreateDate = table.Column<DateTime>(nullable: true),
+                    IsActive = table.Column<int>(nullable: false),
+                    IsDelete = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    UpdateBy = table.Column<string>(nullable: true),
+                    UpdateDate = table.Column<DateTime>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AssetCategory", x => x.AssetCategoryId);
+                });
+
             migrationBuilder.CreateTable(
                 name: "AssetDepreciation",
                 columns: table => new
@@ -424,6 +444,7 @@ namespace ASSET.Data.Migrations
                     AssetWarrantyId = table.Column<int>(nullable: true),
                     Barcode = table.Column<string>(nullable: true),
                     Brand = table.Column<string>(nullable: true),
+                    CategoryAssetCategoryId = table.Column<int>(nullable: true),
                     Code = table.Column<string>(nullable: true),
                     Color = table.Column<string>(nullable: true),
                     CreateBy = table.Column<string>(nullable: false),
@@ -462,6 +483,12 @@ namespace ASSET.Data.Migrations
                         column: x => x.AssetWarrantyId,
                         principalTable: "AssetWarranty",
                         principalColumn: "AssetWarrantyId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Asset_AssetCategory_CategoryAssetCategoryId",
+                        column: x => x.CategoryAssetCategoryId,
+                        principalTable: "AssetCategory",
+                        principalColumn: "AssetCategoryId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Asset_EmployeeFaculty_EmployeeFacultyId",
@@ -519,40 +546,6 @@ namespace ASSET.Data.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "AssetCategory",
-                columns: table => new
-                {
-                    AssetCategoryId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    AssetId = table.Column<int>(nullable: true),
-                    Code = table.Column<string>(nullable: true),
-                    CreateBy = table.Column<string>(nullable: false),
-                    CreateDate = table.Column<DateTime>(nullable: true),
-                    IsActive = table.Column<int>(nullable: false),
-                    IsDelete = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    UpdateBy = table.Column<string>(nullable: true),
-                    UpdateDate = table.Column<DateTime>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AssetCategory", x => x.AssetCategoryId);
-                    table.ForeignKey(
-                        name: "FK_AssetCategory_Asset_AssetId",
-                        column: x => x.AssetId,
-                        principalTable: "Asset",
-                        principalColumn: "AssetId",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AssetCategory_AssetId",
-                table: "AssetCategory",
-                column: "AssetId",
-                unique: true,
-                filter: "[AssetId] IS NOT NULL");
-
             migrationBuilder.CreateIndex(
                 name: "IX_Asset_AssetDepreciationId",
                 table: "Asset",
@@ -566,6 +559,13 @@ namespace ASSET.Data.Migrations
                 column: "AssetWarrantyId",
                 unique: true,
                 filter: "[AssetWarrantyId] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Asset_CategoryAssetCategoryId",
+                table: "Asset",
+                column: "CategoryAssetCategoryId",
+                unique: true,
+                filter: "[CategoryAssetCategoryId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Asset_EmployeeFacultyId",
@@ -690,22 +690,19 @@ namespace ASSET.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AssetCategory");
-
-            migrationBuilder.DropTable(
-                name: "Supplier");
-
-            migrationBuilder.DropTable(
                 name: "Asset");
 
             migrationBuilder.DropTable(
-                name: "SupplierGroup");
+                name: "Supplier");
 
             migrationBuilder.DropTable(
                 name: "AssetDepreciation");
 
             migrationBuilder.DropTable(
                 name: "AssetWarranty");
+
+            migrationBuilder.DropTable(
+                name: "AssetCategory");
 
             migrationBuilder.DropTable(
                 name: "AssetGroup");
@@ -721,6 +718,9 @@ namespace ASSET.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AssetUnit");
+
+            migrationBuilder.DropTable(
+                name: "SupplierGroup");
 
             migrationBuilder.DropTable(
                 name: "AssetWarrantyCompany");
