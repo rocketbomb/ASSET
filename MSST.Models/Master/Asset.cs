@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using ASSET.Common;
 
 namespace ASSET.Models.Master
@@ -14,8 +15,14 @@ namespace ASSET.Models.Master
 		public int AssetId { get; set; }
 		public string Code { get; set; }
 		public string Barcode { get; set; }
+
+		//[Column("Thai Name", TypeName = "ntext")]
 		public string NameThai { get; set; }
+
+		//[Column("English Name", TypeName = "ntext")]
 		public string NameEng { get; set; }
+
+		//[Column("Old Code", TypeName = "ntext")]
 		public string OldCode { get; set; }
 
 		public virtual AssetUnit Unit { get; set; }

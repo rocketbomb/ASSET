@@ -1,0 +1,113 @@
+﻿@model ASSET.Models.Master.Asset
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<div>
+    <h4>Asset</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Code)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Code)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Barcode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Barcode)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NameThai)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NameThai)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NameEng)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NameEng)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OldCode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OldCode)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Color)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Color)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Size)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Size)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Brand)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Brand)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Model)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Model)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SerialNo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SerialNo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateBy)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreateBy)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateBy)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UpdateBy)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UpdateDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsActive)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsDelete)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsDelete)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.AssetId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

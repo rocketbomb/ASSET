@@ -1,0 +1,127 @@
+﻿@model IEnumerable<ASSET.Models.Master.Asset>
+
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<div class="margin-bottom-10">
+	<p>
+		<a asp-action="Create" class="btn btn-info" role="button">Create New</a>
+	</p>
+</div>
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Code)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Barcode)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.NameThai)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.NameEng)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.OldCode)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Color)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Size)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Brand)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Model)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.SerialNo)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.CreateBy)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.CreateDate)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.UpdateBy)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.UpdateDate)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.IsActive)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.IsDelete)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.Code)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Barcode)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.NameThai)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.NameEng)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.OldCode)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Color)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Size)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Brand)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Model)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.SerialNo)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.CreateBy)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.CreateDate)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.UpdateBy)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.UpdateDate)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.IsActive)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.IsDelete)
+				</td>
+				<td>
+					<a asp-action="Edit" asp-route-id="@item.AssetId">Edit</a> |
+					<a asp-action="Details" asp-route-id="@item.AssetId">Details</a> |
+					<a asp-action="Delete" asp-route-id="@item.AssetId">Delete</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
