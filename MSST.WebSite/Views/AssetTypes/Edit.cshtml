@@ -1,17 +1,17 @@
-﻿@model ASSET.Models.Master.AssetUnit
+﻿@model ASSET.Models.Master.AssetType
 
 @{
-	ViewData["Title"] = "Asset Units";
+	ViewData["Title"] = "Edit";
 	Layout = "~/Views/Shared/_Layout2.cshtml";
 }
 
-<h4>Asset Units</h4>
+<h4>Asset Types</h4>
 <hr />
 <div class="row">
 	<div class="col-md-4">
 		<form asp-action="Edit">
 			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-			<input type="hidden" asp-for="AssetUnitId" />
+			<input type="hidden" asp-for="AssetTypeId" />
 			<div class="form-group">
 				<label asp-for="Code" class="control-label"></label>
 				<input asp-for="Code" class="form-control" />

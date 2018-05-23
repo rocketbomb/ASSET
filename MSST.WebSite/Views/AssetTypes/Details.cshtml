@@ -1,12 +1,12 @@
-﻿@model ASSET.Models.Master.AssetUnit
+﻿@model ASSET.Models.Master.AssetType
 
 @{
-	ViewData["Title"] = "Asset Units";
-	Layout = "~/Views/Shared/_Layout2.cshtml";
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
 }
 
 <div>
-    <h4>Asset Unit</h4>
+    <h4>Asset Type</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -60,7 +60,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.AssetUnitId">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model.AssetTypeId">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
-
