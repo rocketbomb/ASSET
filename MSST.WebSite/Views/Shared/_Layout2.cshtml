@@ -557,7 +557,8 @@ License: You must have a valid license purchased only from themeforest(the above
 							<span class="title">Dashboard</span>
 							<span class="arrow"></span>
 						</a>
-						<ul class="sub-menu always-open" >
+						@*<ul class="sub-menu always-open" >*@
+						<ul class="sub-menu">
 							<li class="nav-item start ">
 								<a href="index.html" class="nav-link ">
 									<i class="icon-bar-chart"></i>
@@ -590,7 +591,7 @@ License: You must have a valid license purchased only from themeforest(the above
 							<span class="title">Master Data</span>
 							<span class="arrow"></span>
 						</a>
-						<ul class="sub-menu always-open"">
+						<ul class="sub-menu">
 
 
 							<li class="nav-item  ">
@@ -621,7 +622,7 @@ License: You must have a valid license purchased only from themeforest(the above
 							<span class="arrow"></span>
 						</a>
 
-						<ul class="sub-menu always-open">
+						<ul class="sub-menu">
 							<li class="nav-item  ">
 								<a href="/assetcategories/index" class="nav-link ">
 									<span class="title">Asset Category</span>
@@ -693,11 +694,12 @@ License: You must have a valid license purchased only from themeforest(the above
 		<div class="page-content-wrapper">
 			<!-- BEGIN CONTENT BODY -->
 			<div class="page-content">
-
 				<!-- BEGIN PAGE BASE CONTENT -->
 				<div class="note note-info">
+
+
 					<!-- BEGIN PAGE BREADCRUMB -->
-					<ul class="page-breadcrumb breadcrumb">
+					@*<ul class="page-breadcrumb breadcrumb">
 						<li>
 							<a href="Index">Home</a>
 							<i class="fa fa-circle"></i>
@@ -705,9 +707,11 @@ License: You must have a valid license purchased only from themeforest(the above
 						<li>
 							<span class="active">Page Layouts</span>
 						</li>
-					</ul>
+					</ul>*@
 					<!-- END PAGE BREADCRUMB -->
 					@RenderBody()
+
+
 				</div>
 				<!-- END PAGE BASE CONTENT -->
 			</div>

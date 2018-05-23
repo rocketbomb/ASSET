@@ -1,82 +1,109 @@
 ﻿@model IEnumerable<ASSET.Models.Master.AssetUnit>
 
 @{
-
 	ViewData["Title"] = "Asset Units";
 	Layout = "~/Views/Shared/_Layout2.cshtml";
 }
 
 
-	<div class="margin-bottom-10">
-		<p>
+<table class="table" style="border:hidden">
+
+	<tr>
+		<td>
+			<h2>Asset Unit</h2>
+		</td>
+		<td class="text-right">
+			<div class="margin-bottom-5"></div>
 			<a asp-action="Create" class="btn btn-info" role="button">Create New</a>
-		</p>
-	</div>
-	<table class="table table-bordered">
-		<thead>
+		</td>
+	</tr>
+
+</table>
+
+<!-- BEGIN PAGE BREADCRUMB -->
+<ul class="page-breadcrumb breadcrumb">
+	<li>
+		<a href="Index">Home</a>
+		<i class="fa fa-circle"></i>
+	</li>
+	<li>
+		<span class="active">Page Layouts</span>
+	</li>
+</ul>
+<!-- END PAGE BREADCRUMB -->
+
+<ul class="nav nav-tabs">
+	<li class="active"><a href="#">List</a></li>
+	<li><a href="#">Advance Search</a></li>
+
+</ul>
+
+
+<table class="table table-bordered table-condensed table-hover">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Code)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Name)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.CreateBy)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.CreateDate)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.UpdateBy)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.UpdateDate)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.IsActive)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.IsDelete)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
 			<tr>
-				<th>
-					@Html.DisplayNameFor(model => model.Code)
-				</th>
-				<th>
-					@Html.DisplayNameFor(model => model.Name)
-				</th>
-				<th>
-					@Html.DisplayNameFor(model => model.CreateBy)
-				</th>
-				<th>
-					@Html.DisplayNameFor(model => model.CreateDate)
-				</th>
-				<th>
-					@Html.DisplayNameFor(model => model.UpdateBy)
-				</th>
-				<th>
-					@Html.DisplayNameFor(model => model.UpdateDate)
-				</th>
-				<th>
-					@Html.DisplayNameFor(model => model.IsActive)
-				</th>
-				<th>
-					@Html.DisplayNameFor(model => model.IsDelete)
-				</th>
-				<th></th>
+				<td>
+					@Html.DisplayFor(modelItem => item.Code)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Name)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.CreateBy)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.CreateDate)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.UpdateBy)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.UpdateDate)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.IsActive)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.IsDelete)
+				</td>
+				<td>
+					<a asp-action="Edit" asp-route-id="@item.AssetUnitId">Edit</a> |
+					<a asp-action="Details" asp-route-id="@item.AssetUnitId">Details</a> |
+					<a asp-action="Delete" asp-route-id="@item.AssetUnitId">Delete</a>
+				</td>
 			</tr>
-		</thead>
-		<tbody>
-			@foreach (var item in Model)
-			{
-				<tr>
-					<td>
-						@Html.DisplayFor(modelItem => item.Code)
-					</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.Name)
-					</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.CreateBy)
-					</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.CreateDate)
-					</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.UpdateBy)
-					</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.UpdateDate)
-					</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.IsActive)
-					</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.IsDelete)
-					</td>
-					<td>
-						<a asp-action="Edit" asp-route-id="@item.AssetUnitId">Edit</a> |
-						<a asp-action="Details" asp-route-id="@item.AssetUnitId">Details</a> |
-						<a asp-action="Delete" asp-route-id="@item.AssetUnitId">Delete</a>
-					</td>
-				</tr>
-			}
-		</tbody>
-	</table>
+		}
+	</tbody>
+</table>
 

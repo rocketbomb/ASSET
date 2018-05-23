@@ -5,11 +5,38 @@
 	Layout = "~/Views/Shared/_Layout2.cshtml";
 }
 
-<div class="margin-bottom-10">
-	<p>
-		<a asp-action="Create" class="btn btn-info" role="button">Create New</a>
-	</p>
-</div>
+<table class="table" style="border:hidden">
+
+	<tr>
+		<td>
+			<h2>Asset</h2>
+		</td>
+		<td class="text-right">
+			<div class="margin-bottom-5"></div>
+			<a asp-action="Create" class="btn btn-info" role="button">Create New</a>
+		</td>
+	</tr>
+
+</table>
+
+<!-- BEGIN PAGE BREADCRUMB -->
+<ul class="page-breadcrumb breadcrumb">
+	<li>
+		<a href="Index">Home</a>
+		<i class="fa fa-circle"></i>
+	</li>
+	<li>
+		<span class="active">Page Layouts</span>
+	</li>
+</ul>
+<!-- END PAGE BREADCRUMB -->
+
+<ul class="nav nav-tabs">
+	<li class="active"><a href="#">List</a></li>
+	<li><a href="#">Advance Search</a></li>
+
+</ul>
+
 <table class="table table-bordered">
 	<thead>
 		<tr>
