@@ -11,6 +11,8 @@
     <Compile Remove="Migrations\20180516071139_Update1.cs" />
     <Compile Remove="Migrations\20180516074334_Update2.cs" />
     <Compile Remove="Migrations\20180523034819_Update2.cs" />
+    <Compile Remove="Migrations\20180524041044_Update2.cs" />
+    <Compile Remove="Migrations\20180524041631_Update2.cs" />
   </ItemGroup>
 
   <ItemGroup>

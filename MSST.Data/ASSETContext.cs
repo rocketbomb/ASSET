@@ -30,8 +30,8 @@ namespace ASSET.Data
 		public DbSet<Supplier> Supplier { get; set; }
 		public DbSet<SupplierGroup> SupplierGroup { get; set; }
 
+		public DbSet<Ownership> Ownership { get; set; }
 
 
-		
 	}
 }

@@ -11,11 +11,13 @@ namespace ASSET.Models.Master
 		}
 
 		public int OwnershipId { get; set; }
-		public virtual Asset Asset { get; set; }
-		public virtual Employee Employee { get; set; }
-		public virtual EmployeeMajor EmployeeMajor { get; set; }
-		public virtual EmployeeFaculty EmployeeFaculty { get; set; }
-		public virtual EmployeeUniversity EmployeeUniversity { get; set; }
+		public Asset Asset { get; set; }
+		public Employee Employee { get; set; }
+		public EmployeeMajor EmployeeMajor { get; set; }
+		public EmployeeFaculty EmployeeFaculty { get; set; }
+		public EmployeeUniversity EmployeeUniversity { get; set; }
+
+
 
 	}
 }

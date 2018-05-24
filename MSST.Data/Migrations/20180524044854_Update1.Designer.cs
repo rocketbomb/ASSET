@@ -11,7 +11,7 @@ using System;
 namespace ASSET.Data.Migrations
 {
     [DbContext(typeof(ASSETContext))]
-    [Migration("20180522061721_Update1")]
+    [Migration("20180524044854_Update1")]
     partial class Update1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

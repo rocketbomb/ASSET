@@ -1,0 +1,55 @@
+﻿@model ASSET.Models.Master.Ownership
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Ownership</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateBy)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreateBy)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateBy)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UpdateBy)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UpdateDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsActive)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsDelete)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsDelete)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.OwnershipId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
