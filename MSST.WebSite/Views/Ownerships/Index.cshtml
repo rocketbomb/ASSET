@@ -1,66 +1,94 @@
 ﻿@model IEnumerable<ASSET.Models.Master.Ownership>
 
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout2.cshtml";
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_Layout2.cshtml";
 }
+<table class="table table-borderless">
 
-<h2>Index</h2>
+	<tr>
+		<td>
+			<h2>Ownership</h2>
+		</td>
+		<td class="text-right">
+			<div class="margin-bottom-5"></div>
+			<a asp-action="Create" class="btn btn-info" role="button">Create New</a>
+		</td>
+	</tr>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.CreateBy)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CreateDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.UpdateBy)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.UpdateDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IsActive)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IsDelete)
-                </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreateBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreateDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdateBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdateDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsActive)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsDelete)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.OwnershipId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.OwnershipId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.OwnershipId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
+</table>
+
+<!-- BEGIN PAGE BREADCRUMB -->
+<ul class="page-breadcrumb breadcrumb">
+	<li>
+		<a href="Index">Home</a>
+		<i class="fa fa-circle"></i>
+	</li>
+	<li>
+		<span class="active">Page Layouts</span>
+	</li>
+</ul>
+<!-- END PAGE BREADCRUMB -->
+
+<ul class="nav nav-tabs">
+	<li class="active"><a href="#">List</a></li>
+	<li><a href="#">Search</a></li>
+
+</ul>
+
+
+<table class="table table-bordered table-condensed table-hover">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.CreateBy)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.CreateDate)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.UpdateBy)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.UpdateDate)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.IsActive)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.IsDelete)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.CreateBy)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.CreateDate)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.UpdateBy)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.UpdateDate)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.IsActive)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.IsDelete)
+				</td>
+				<td>
+					<a asp-action="Edit" asp-route-id="@item.OwnershipId">Edit</a> |
+					<a asp-action="Details" asp-route-id="@item.OwnershipId">Details</a> |
+					<a asp-action="Delete" asp-route-id="@item.OwnershipId">Delete</a>
+				</td>
+			</tr>
+		}
+	</tbody>
 </table>

@@ -7,6 +7,6 @@
 }
 
 /*Remove stop line table*/
-.table > tbody > tr > td {
+.table-borderless > tbody > tr > td {
 	border-top: hidden
 }

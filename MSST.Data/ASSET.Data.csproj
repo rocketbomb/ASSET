@@ -13,6 +13,8 @@
     <Compile Remove="Migrations\20180523034819_Update2.cs" />
     <Compile Remove="Migrations\20180524041044_Update2.cs" />
     <Compile Remove="Migrations\20180524041631_Update2.cs" />
+    <Compile Remove="Migrations\20180524050128_Update2.cs" />
+    <Compile Remove="Migrations\20180524050258_Update2.cs" />
   </ItemGroup>
 
   <ItemGroup>
