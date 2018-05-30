@@ -22,7 +22,7 @@ namespace ASSET.WebSite.Controllers
         // GET: EmployeeFaculties
         public async Task<IActionResult> Index()
         {
-            return View(await _context.EmployeeFaculty.ToListAsync());
+            return View(await _context.EmployeeFaculty.Include(u => u.University).ToListAsync());
         }
 
         // GET: EmployeeFaculties/Details/5
@@ -46,7 +46,11 @@ namespace ASSET.WebSite.Controllers
         // GET: EmployeeFaculties/Create
         public IActionResult Create()
         {
-            return View();
+			List<EmployeeUniversity> UniversityList = new List<EmployeeUniversity>();
+			UniversityList = (from universities in _context.EmployeeUniversity select universities).ToList();
+			ViewBag.ListofUniversity = UniversityList;
+
+			return View();
         }
 
         // POST: EmployeeFaculties/Create
@@ -54,7 +58,7 @@ namespace ASSET.WebSite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EmployeeFacultyId,Code,Name,UniversityId,CreateBy,CreateDate,UpdateBy,UpdateDate,UniversityId,IsActive,IsDelete")] EmployeeFaculty employeeFaculty)
+        public async Task<IActionResult> Create([Bind("EmployeeFacultyId,Code,Name,UniversityId,University,CreateBy,CreateDate,UpdateBy,UpdateDate,IsActive,IsDelete")] EmployeeFaculty employeeFaculty)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +94,7 @@ namespace ASSET.WebSite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("EmployeeFacultyId,Code,Name,UniversityId,CreateBy,CreateDate,UpdateBy,UpdateDate,IsActive,IsDelete")] EmployeeFaculty employeeFaculty)
+        public async Task<IActionResult> Edit(int id, [Bind("EmployeeFacultyId,Code,Name,UniversityId,University,CreateBy,CreateDate,UpdateBy,UpdateDate,IsActive,IsDelete")] EmployeeFaculty employeeFaculty)
         {
             if (id != employeeFaculty.EmployeeFacultyId)
             {
