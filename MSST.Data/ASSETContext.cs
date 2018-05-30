@@ -1,5 +1,8 @@
 ﻿using ASSET.Models.Master;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ASSET.Data
 {
@@ -31,6 +34,19 @@ namespace ASSET.Data
 		public DbSet<SupplierGroup> SupplierGroup { get; set; }
 
 		public DbSet<Ownership> Ownership { get; set; }
+
+
+
+		private readonly ASSETContext _context;
+
+		public List<EmployeeUniversity> GetUniversity()
+		{
+			var data = _context.EmployeeUniversity.ToList<EmployeeUniversity>();
+
+			return data;
+		}
+
+
 
 
 	}

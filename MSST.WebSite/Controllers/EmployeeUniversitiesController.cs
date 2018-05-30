@@ -68,7 +68,8 @@ namespace ASSET.WebSite.Controllers
         // GET: EmployeeUniversities/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+
+			if (id == null)
             {
                 return NotFound();
             }

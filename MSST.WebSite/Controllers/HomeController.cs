@@ -15,7 +15,12 @@ namespace ASSET.WebSite.Controllers
             return View();
         }
 
-        public IActionResult About()
+		public IActionResult LoginEshop()
+		{
+			return View();
+		}
+
+		public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
 

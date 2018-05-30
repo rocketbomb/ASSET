@@ -54,7 +54,7 @@ namespace ASSET.WebSite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EmployeeFacultyId,Code,Name,CreateBy,CreateDate,UpdateBy,UpdateDate,IsActive,IsDelete")] EmployeeFaculty employeeFaculty)
+        public async Task<IActionResult> Create([Bind("EmployeeFacultyId,Code,Name,CreateBy,CreateDate,UpdateBy,UpdateDate,EmployeeUniversityId,IsActive,IsDelete")] EmployeeFaculty employeeFaculty)
         {
             if (ModelState.IsValid)
             {
@@ -68,7 +68,11 @@ namespace ASSET.WebSite.Controllers
         // GET: EmployeeFaculties/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+			List<EmployeeUniversity> UniversityList = new List<EmployeeUniversity>();
+			UniversityList = (from universities in _context.EmployeeUniversity select universities).ToList();
+			ViewBag.ListofUniversity = UniversityList;
+
+			if (id == null)
             {
                 return NotFound();
             }
@@ -149,5 +153,9 @@ namespace ASSET.WebSite.Controllers
         {
             return _context.EmployeeFaculty.Any(e => e.EmployeeFacultyId == id);
         }
-    }
+
+
+		
+	
+	}
 }

@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using ASSET.Common;
 
+
 namespace ASSET.Models.Master
 {
     public class EmployeeUniversity : Base
 	{
+		
+
 		public EmployeeUniversity()
 		{
 			
@@ -21,6 +24,8 @@ namespace ASSET.Models.Master
 		public virtual ICollection<Asset> Asset { get; set; }
 
 		public virtual Ownership Ownership { get; set; }
+
+		
 
 	}
 }
