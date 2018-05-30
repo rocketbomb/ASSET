@@ -11,9 +11,10 @@ using System;
 namespace ASSET.Data.Migrations
 {
     [DbContext(typeof(ASSETContext))]
-    partial class ASSETContextModelSnapshot : ModelSnapshot
+    [Migration("20180530085847_update3")]
+    partial class update3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -433,7 +434,7 @@ namespace ASSET.Data.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("UniversityId");
+                    b.Property<int?>("UniversityEmployeeUniversityId");
 
                     b.Property<string>("UpdateBy");
 
@@ -443,7 +444,9 @@ namespace ASSET.Data.Migrations
 
                     b.HasIndex("MajorEmployeeMajorId");
 
-                    b.HasIndex("UniversityId");
+                    b.HasIndex("UniversityEmployeeUniversityId")
+                        .IsUnique()
+                        .HasFilter("[UniversityEmployeeUniversityId] IS NOT NULL");
 
                     b.ToTable("EmployeeFaculty");
                 });
@@ -755,9 +758,8 @@ namespace ASSET.Data.Migrations
                         .HasForeignKey("MajorEmployeeMajorId");
 
                     b.HasOne("ASSET.Models.Master.EmployeeUniversity", "University")
-                        .WithMany("EmployeeFaculty")
-                        .HasForeignKey("UniversityId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .WithOne("Faculty")
+                        .HasForeignKey("ASSET.Models.Master.EmployeeFaculty", "UniversityEmployeeUniversityId");
                 });
 
             modelBuilder.Entity("ASSET.Models.Master.Location", b =>

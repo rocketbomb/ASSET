@@ -19,13 +19,15 @@ namespace ASSET.Models.Master
         public string NameThai { get; set; }
 		public string NameEng { get; set; }
 
-		public EmployeeFaculty Faculty { get; set; }
+		
 
 		public virtual ICollection<Asset> Asset { get; set; }
 
 		public virtual Ownership Ownership { get; set; }
 
-		
+
+		public ICollection<EmployeeFaculty> EmployeeFaculty { get; set; }
+
 
 	}
 }

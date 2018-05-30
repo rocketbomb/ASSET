@@ -54,7 +54,7 @@ namespace ASSET.WebSite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EmployeeFacultyId,Code,Name,CreateBy,CreateDate,UpdateBy,UpdateDate,EmployeeUniversityId,IsActive,IsDelete")] EmployeeFaculty employeeFaculty)
+        public async Task<IActionResult> Create([Bind("EmployeeFacultyId,Code,Name,UniversityId,CreateBy,CreateDate,UpdateBy,UpdateDate,UniversityId,IsActive,IsDelete")] EmployeeFaculty employeeFaculty)
         {
             if (ModelState.IsValid)
             {
@@ -90,14 +90,14 @@ namespace ASSET.WebSite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("EmployeeFacultyId,Code,Name,CreateBy,CreateDate,UpdateBy,UpdateDate,IsActive,IsDelete")] EmployeeFaculty employeeFaculty)
+        public async Task<IActionResult> Edit(int id, [Bind("EmployeeFacultyId,Code,Name,UniversityId,CreateBy,CreateDate,UpdateBy,UpdateDate,IsActive,IsDelete")] EmployeeFaculty employeeFaculty)
         {
             if (id != employeeFaculty.EmployeeFacultyId)
             {
                 return NotFound();
             }
-
-            if (ModelState.IsValid)
+			
+			if (ModelState.IsValid)
             {
                 try
                 {

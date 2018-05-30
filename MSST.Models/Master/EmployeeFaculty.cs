@@ -20,6 +20,7 @@ namespace ASSET.Models.Master
 
 		public virtual Ownership Ownership { get; set; }
 
-		public virtual EmployeeUniversity University { get; set; }
+		public int UniversityId { get; set; }
+		public EmployeeUniversity University { get; set; }
 	}
 }

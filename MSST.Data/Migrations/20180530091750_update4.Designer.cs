@@ -11,9 +11,10 @@ using System;
 namespace ASSET.Data.Migrations
 {
     [DbContext(typeof(ASSETContext))]
-    partial class ASSETContextModelSnapshot : ModelSnapshot
+    [Migration("20180530091750_update4")]
+    partial class update4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -433,7 +434,7 @@ namespace ASSET.Data.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("UniversityId");
+                    b.Property<int?>("UniversityEmployeeUniversityId");
 
                     b.Property<string>("UpdateBy");
 
@@ -443,7 +444,7 @@ namespace ASSET.Data.Migrations
 
                     b.HasIndex("MajorEmployeeMajorId");
 
-                    b.HasIndex("UniversityId");
+                    b.HasIndex("UniversityEmployeeUniversityId");
 
                     b.ToTable("EmployeeFaculty");
                 });
@@ -755,9 +756,8 @@ namespace ASSET.Data.Migrations
                         .HasForeignKey("MajorEmployeeMajorId");
 
                     b.HasOne("ASSET.Models.Master.EmployeeUniversity", "University")
-                        .WithMany("EmployeeFaculty")
-                        .HasForeignKey("UniversityId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .WithMany()
+                        .HasForeignKey("UniversityEmployeeUniversityId");
                 });
 
             modelBuilder.Entity("ASSET.Models.Master.Location", b =>
