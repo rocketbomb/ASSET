@@ -72,16 +72,18 @@ namespace ASSET.WebSite.Controllers
         // GET: EmployeeFaculties/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-			List<EmployeeUniversity> UniversityList = new List<EmployeeUniversity>();
-			UniversityList = (from universities in _context.EmployeeUniversity select universities).ToList();
-			ViewBag.ListofUniversity = UniversityList;
+			//List<EmployeeUniversity> UniversityList = new List<EmployeeUniversity>();
+			//UniversityList = (from universities in _context.EmployeeUniversity select universities).ToList();
+			//ViewBag.ListofUniversity = UniversityList;
 
 			if (id == null)
             {
                 return NotFound();
             }
 
-            var employeeFaculty = await _context.EmployeeFaculty.SingleOrDefaultAsync(m => m.EmployeeFacultyId == id);
+			ViewBag.ListofUniversity = await _context.EmployeeUniversity.ToListAsync();
+
+			var employeeFaculty = await _context.EmployeeFaculty.SingleOrDefaultAsync(m => m.EmployeeFacultyId == id);
             if (employeeFaculty == null)
             {
                 return NotFound();
