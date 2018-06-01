@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using ReflectionIT.Mvc.Paging;
 
 namespace ASSET.WebSite
 {
@@ -24,6 +25,7 @@ namespace ASSET.WebSite
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+			services.AddPaging();
 
             //services.AddDbContext<ASSETContext>(options => options.UseSqlServer(connection));
 			//services.AddDbContext<ASSETContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Development"), x => x.MigrationsAssembly("ASSET.Data")));

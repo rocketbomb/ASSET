@@ -1,6 +1,11 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ASSET.Common
 {
@@ -38,6 +43,11 @@ namespace ASSET.Common
 			return "SYSTEM";
 		}
 
-		
+
 	}
+
+
+	
+
+
 }

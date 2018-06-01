@@ -8,24 +8,29 @@ using Microsoft.EntityFrameworkCore;
 using ASSET.Data;
 using ASSET.Models.Master;
 using ASSET.Common;
+using ReflectionIT.Mvc.Paging;
 
 namespace ASSET.WebSite.Controllers
 {
     public class AssetTypesController : Controller
     {
         private readonly ASSETContext _context;
-		private readonly Utility u;
+		private readonly Utility _u;
 
 		public AssetTypesController(ASSETContext context)
         {
             _context = context;
-			u = new Utility();
+			_u = new Utility();
 		}
 
         // GET: AssetTypes
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page=1, string sortExpression = "Name")
         {
-            return View(await _context.AssetType.Where(i => i.IsDelete == 0).ToListAsync());
+			var item = _context.AssetType.Where(i => i.IsDelete == 0).AsNoTracking();
+			var model = await PagingList.CreateAsync(item, 10, page, sortExpression, "Name");
+
+			return View(model);
+            //return View(await _context.AssetType.Where(i => i.IsDelete == 0).ToListAsync());
         }
 
         // GET: AssetTypes/Details/5
@@ -49,8 +54,8 @@ namespace ASSET.WebSite.Controllers
         // GET: AssetTypes/Create
         public IActionResult Create()
         {
-			ViewBag.getCurrentDate = u.getCurrentDate();
-			ViewBag.getUser = u.getUser();
+			ViewBag.getCurrentDate = _u.getCurrentDate();
+			ViewBag.getUser = _u.getUser();
 
 			return View();
         }
@@ -81,8 +86,8 @@ namespace ASSET.WebSite.Controllers
 
             var assetType = await _context.AssetType.SingleOrDefaultAsync(m => m.AssetTypeId == id);
 
-			ViewBag.getCurrentDate = u.getCurrentDate();
-			ViewBag.getUser = u.getUser();
+			ViewBag.getCurrentDate = _u.getCurrentDate();
+			ViewBag.getUser = _u.getUser();
 
 			if (assetType == null)
             {
