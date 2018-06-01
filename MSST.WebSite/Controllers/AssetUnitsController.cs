@@ -14,11 +14,13 @@ namespace ASSET.WebSite.Controllers
     public class AssetUnitsController : Controller
     {
         private readonly ASSETContext _context;
+		private readonly Utility u;
 
         public AssetUnitsController(ASSETContext context)
         {
             _context = context;
-        }
+			u = new Utility();
+		}
 
         // GET: AssetUnits
         public async Task<IActionResult> Index()
@@ -47,7 +49,6 @@ namespace ASSET.WebSite.Controllers
         // GET: AssetUnits/Create
         public IActionResult Create()
         {
-			Utility u = new Utility();
 			ViewBag.CurrentDate = u.CurrentDate();
 
 			return View();
@@ -79,7 +80,9 @@ namespace ASSET.WebSite.Controllers
 
             var assetUnit = await _context.AssetUnit.SingleOrDefaultAsync(m => m.AssetUnitId == id);
 
-            if (assetUnit == null)
+			ViewBag.CurrentDate = u.CurrentDate();
+
+			if (assetUnit == null)
             {
                 return NotFound();
             }

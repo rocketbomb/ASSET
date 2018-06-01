@@ -28,7 +28,7 @@
             </div>
             <div class="form-group" hidden>
                 <label asp-for="CreateDate" class="control-label"></label>
-                <input asp-for="CreateDate" type="text" class="form-control" value="@(ViewBag.CurrentDate)"/>
+                <input asp-for="CreateDate" class="form-control" type="text" value="@(ViewBag.CurrentDate)" />
                 <span asp-validation-for="CreateDate" class="text-danger"></span>
             </div>
             <div class="form-group" hidden>
