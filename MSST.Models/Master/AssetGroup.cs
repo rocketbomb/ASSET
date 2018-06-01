@@ -6,6 +6,8 @@ namespace ASSET.Models.Master
 {
     public class AssetGroup : Base
 	{
+		private readonly Utility u = new Utility();
+
 		public AssetGroup()
 		{
 

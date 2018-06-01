@@ -28,9 +28,16 @@ namespace ASSET.Common
 	public class Utility
 	{
 
-		public DateTime CurrentDate()
+		public DateTime getCurrentDate()
 		{
 			return DateTime.Now;
 		}
+
+		public string getUser()
+		{
+			return "SYSTEM";
+		}
+
+		
 	}
 }

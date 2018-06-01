@@ -6,6 +6,8 @@ namespace ASSET.Models.Master
 {
     public class EmployeeMajor : Base
 	{
+		private readonly Utility u = new Utility();
+
 		public EmployeeMajor()
 		{
 			
@@ -20,5 +22,12 @@ namespace ASSET.Models.Master
 		public virtual ICollection<Asset> Asset { get; set; }
 
 		public virtual Ownership Ownership { get; set; }
+
+		public void setDelete()
+		{
+			IsDelete = 1;
+			UpdateBy = u.getUser();
+			UpdateDate = u.getCurrentDate();
+		}
 	}
 }

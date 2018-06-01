@@ -49,7 +49,8 @@ namespace ASSET.WebSite.Controllers
         // GET: AssetUnits/Create
         public IActionResult Create()
         {
-			ViewBag.CurrentDate = u.CurrentDate();
+			ViewBag.getCurrentDate = u.getCurrentDate();
+			ViewBag.getUser = u.getUser();
 
 			return View();
         }
@@ -80,7 +81,8 @@ namespace ASSET.WebSite.Controllers
 
             var assetUnit = await _context.AssetUnit.SingleOrDefaultAsync(m => m.AssetUnitId == id);
 
-			ViewBag.CurrentDate = u.CurrentDate();
+			ViewBag.getCurrentDate = u.getCurrentDate();
+			ViewBag.getUser = u.getUser();
 
 			if (assetUnit == null)
             {
@@ -151,13 +153,15 @@ namespace ASSET.WebSite.Controllers
             //_context.AssetUnit.Remove(assetUnit);
 
 			assetUnit.IsDelete = 1;
+
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool AssetUnitExists(int id)
         {
-            return _context.AssetUnit.Any(e => e.AssetUnitId == id);
+            return _context.AssetUnit.Where(i => i.IsDelete == 0).Any(e => e.AssetUnitId == id);
         }
     }
 }

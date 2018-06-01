@@ -23,12 +23,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="CreateBy" class="control-label"></label>
-                <input asp-for="CreateBy" class="form-control" />
+                <input asp-for="CreateBy" class="form-control" value="SYSTEM"/>
                 <span asp-validation-for="CreateBy" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CreateDate" class="control-label"></label>
-                <input asp-for="CreateDate" class="form-control" />
+                <input asp-for="CreateDate" class="form-control" type="text" value="@(ViewBag.getCurrentDate)" />
                 <span asp-validation-for="CreateDate" class="text-danger"></span>
             </div>
             <div class="form-group">

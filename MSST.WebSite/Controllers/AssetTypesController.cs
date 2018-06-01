@@ -7,22 +7,25 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ASSET.Data;
 using ASSET.Models.Master;
+using ASSET.Common;
 
 namespace ASSET.WebSite.Controllers
 {
     public class AssetTypesController : Controller
     {
         private readonly ASSETContext _context;
+		private readonly Utility u;
 
-        public AssetTypesController(ASSETContext context)
+		public AssetTypesController(ASSETContext context)
         {
             _context = context;
-        }
+			u = new Utility();
+		}
 
         // GET: AssetTypes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.AssetType.ToListAsync());
+            return View(await _context.AssetType.Where(i => i.IsDelete == 0).ToListAsync());
         }
 
         // GET: AssetTypes/Details/5
@@ -46,7 +49,10 @@ namespace ASSET.WebSite.Controllers
         // GET: AssetTypes/Create
         public IActionResult Create()
         {
-            return View();
+			ViewBag.getCurrentDate = u.getCurrentDate();
+			ViewBag.getUser = u.getUser();
+
+			return View();
         }
 
         // POST: AssetTypes/Create
@@ -74,7 +80,11 @@ namespace ASSET.WebSite.Controllers
             }
 
             var assetType = await _context.AssetType.SingleOrDefaultAsync(m => m.AssetTypeId == id);
-            if (assetType == null)
+
+			ViewBag.getCurrentDate = u.getCurrentDate();
+			ViewBag.getUser = u.getUser();
+
+			if (assetType == null)
             {
                 return NotFound();
             }
@@ -140,14 +150,17 @@ namespace ASSET.WebSite.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var assetType = await _context.AssetType.SingleOrDefaultAsync(m => m.AssetTypeId == id);
-            _context.AssetType.Remove(assetType);
-            await _context.SaveChangesAsync();
+			//_context.AssetType.Remove(assetType);
+
+			assetType.setDelete();
+
+			await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool AssetTypeExists(int id)
         {
-            return _context.AssetType.Any(e => e.AssetTypeId == id);
+            return _context.AssetType.Where(i => i.IsDelete == 0).Any(e => e.AssetTypeId == id);
         }
     }
 }

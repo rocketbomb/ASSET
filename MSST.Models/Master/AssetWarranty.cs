@@ -7,6 +7,8 @@ namespace ASSET.Models.Master
 {
     public class AssetWarranty : Base
     {
+		private readonly Utility u = new Utility();
+
 		public AssetWarranty()
 		{
 			
@@ -32,6 +34,11 @@ namespace ASSET.Models.Master
 
 		public virtual Asset Asset { get; set; }
 
-
+		public void setDelete()
+		{
+			IsDelete = 1;
+			UpdateBy = u.getUser();
+			UpdateDate = u.getCurrentDate();
+		}
 	}
 }

@@ -6,6 +6,8 @@ namespace ASSET.Models.Master
 {
     public class EmployeeFaculty : Base
 	{
+		private readonly Utility u = new Utility();
+
 		public EmployeeFaculty()
 		{
 		}
@@ -22,5 +24,12 @@ namespace ASSET.Models.Master
 
 		public int UniversityId { get; set; }
 		public EmployeeUniversity University { get; set; }
+
+		public void setDelete()
+		{
+			IsDelete = 1;
+			UpdateBy = u.getUser();
+			UpdateDate = u.getCurrentDate();
+		}
 	}
 }

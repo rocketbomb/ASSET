@@ -7,7 +7,8 @@ namespace ASSET.Models.Master
 {
 	public class AssetDepreciation : Base
 	{
-	
+		private readonly Utility u = new Utility();
+
 		public int AssetDepreciationId { get; set; }
 		public DateTime PurchaseDate { get; set; }
 		public double Cost { get; set; }

@@ -6,6 +6,8 @@ namespace ASSET.Models.Master
 {
     public class Supplier : Base
 	{
+		private readonly Utility u = new Utility();
+
 		public Supplier()
 		{
 		}
@@ -19,5 +21,12 @@ namespace ASSET.Models.Master
         public string Email { get; set; }
 
 		public SupplierGroup SupplierGroup { get; set; }
+
+		public void setDelete()
+		{
+			IsDelete = 1;
+			UpdateBy = u.getUser();
+			UpdateDate = u.getCurrentDate();
+		}
 	}
 }
