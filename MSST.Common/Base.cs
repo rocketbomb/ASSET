@@ -24,4 +24,13 @@ namespace ASSET.Common
 		public int IsDelete { get; set; }
 
 	}
+
+	public class Utility
+	{
+
+		public DateTime CurrentDate()
+		{
+			return DateTime.Now;
+		}
+	}
 }

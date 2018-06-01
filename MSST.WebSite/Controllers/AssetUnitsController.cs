@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ASSET.Data;
 using ASSET.Models.Master;
+using ASSET.Common;
 
 namespace ASSET.WebSite.Controllers
 {
@@ -22,7 +23,7 @@ namespace ASSET.WebSite.Controllers
         // GET: AssetUnits
         public async Task<IActionResult> Index()
         {
-            return View(await _context.AssetUnit.ToListAsync());
+            return View(await _context.AssetUnit.Where(i=>i.IsDelete == 0).ToListAsync());
         }
 
         // GET: AssetUnits/Details/5
@@ -46,7 +47,10 @@ namespace ASSET.WebSite.Controllers
         // GET: AssetUnits/Create
         public IActionResult Create()
         {
-            return View();
+			Utility u = new Utility();
+			ViewBag.CurrentDate = u.CurrentDate();
+
+			return View();
         }
 
         // POST: AssetUnits/Create
@@ -74,6 +78,7 @@ namespace ASSET.WebSite.Controllers
             }
 
             var assetUnit = await _context.AssetUnit.SingleOrDefaultAsync(m => m.AssetUnitId == id);
+
             if (assetUnit == null)
             {
                 return NotFound();
@@ -140,7 +145,9 @@ namespace ASSET.WebSite.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var assetUnit = await _context.AssetUnit.SingleOrDefaultAsync(m => m.AssetUnitId == id);
-            _context.AssetUnit.Remove(assetUnit);
+            //_context.AssetUnit.Remove(assetUnit);
+
+			assetUnit.IsDelete = 1;
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
