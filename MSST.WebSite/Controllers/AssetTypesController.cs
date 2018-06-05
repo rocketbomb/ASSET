@@ -9,6 +9,7 @@ using ASSET.Data;
 using ASSET.Models.Master;
 using ASSET.Common;
 using ReflectionIT.Mvc.Paging;
+using Microsoft.AspNetCore.Routing;
 
 namespace ASSET.WebSite.Controllers
 {
@@ -24,10 +25,26 @@ namespace ASSET.WebSite.Controllers
 		}
 
         // GET: AssetTypes
-        public async Task<IActionResult> Index(int page=1, string sortExpression = "Name")
+        public async Task<IActionResult> Index(string filterCode, string filterName, int page=1, string sortExpression = "Name")
         {
 			var item = _context.AssetType.Where(i => i.IsDelete == 0).AsNoTracking();
+
+			if (!string.IsNullOrWhiteSpace(filterCode))
+			{
+				item = item.Where(p => p.Code.Contains(filterCode));
+			}
+
+			if (!string.IsNullOrWhiteSpace(filterName))
+			{
+				item = item.Where(p => p.Name.Contains(filterName));
+			}
+
 			var model = await PagingList.CreateAsync(item, 10, page, sortExpression, "Name");
+
+			model.RouteValue = new RouteValueDictionary {
+															{ "filterCode", filterCode},
+															{ "filterName", filterName}
+														};
 
 			return View(model);
             //return View(await _context.AssetType.Where(i => i.IsDelete == 0).ToListAsync());

@@ -31,6 +31,24 @@
 </ul>
 <!-- END PAGE BREADCRUMB -->
 
+
+<form method="get" class="form-inline">
+
+	<div class="form-group">
+		<label>Code</label>
+		<input name="filterCode" class="form-control" placeholder="Enter Code" value="@Model.RouteValue["filterCode"]" />
+	</div>
+	<div class="form-group">
+		<label>Name</label>
+		<input name="filterName" class="form-control" placeholder="Enter Name" value="@Model.RouteValue["filterName"]" />
+	</div>
+
+	<button type="submit" class="btn btn-primary">
+		<span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search
+	</button>
+</form>
+
+
 <ul class="nav nav-tabs">
 	<li class="active"><a href="#">List</a></li>
 	<li><a href="#">Search</a></li>
@@ -110,5 +128,5 @@
 </nav>
 
 @*<nav>
-	<vc:pager paging-list="@Model" />
-</nav>*@
+		<vc:pager paging-list="@Model" />
+	</nav>*@

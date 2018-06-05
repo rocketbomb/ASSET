@@ -29,8 +29,6 @@ namespace ASSET.WebSite.Controllers
 		{
 			var item = _context.AssetUnit.Where(i => i.IsDelete == 0).AsNoTracking();
 
-			
-
 			if (!string.IsNullOrWhiteSpace(filterCode))
 			{
 				item = item.Where(p => p.Code.Contains(filterCode));
