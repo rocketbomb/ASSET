@@ -8,6 +8,11 @@ namespace ASSET.Models.Master
 	{
 		private readonly Utility u = new Utility();
 
+		public AssetType()
+		{
+
+		}
+
 		public int AssetTypeId { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }

@@ -28,9 +28,16 @@ namespace ASSET.Models.Master
 		//[Column("Old Code", TypeName = "ntext")]
 		public string OldCode { get; set; }
 
+		public int AssetUnitId { get; set; }
 		public virtual AssetUnit Unit { get; set; }
+
+		public int AssetCategoryId { get; set; }
 		public virtual AssetCategory Category { get; set; }
+
+		public int AssetGroupId { get; set; }
 		public virtual AssetGroup Group { get; set; }
+
+		public int AssetTypeId { get; set; }
 		public virtual AssetType Type { get; set; }
 
 		public string Color { get; set; }
@@ -40,10 +47,15 @@ namespace ASSET.Models.Master
 		public string Model { get; set; }
 		public string SerialNo { get; set; }
 
+		public int LocationId { get; set; }
 		public virtual Location Location { get; set; }
+
+		public int OwnershipId { get; set; }
 		public virtual Ownership Ownership { get; set; }
 
+		public int AssetWarrantyId { get; set; }
 		public AssetWarranty AssetWarranty { get; set; }
+		public int AssetDepreciationId { get; set; }
 		public AssetDepreciation AssetDepreciation { get; set; }
 
 		public void setDelete()

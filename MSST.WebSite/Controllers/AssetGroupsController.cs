@@ -7,23 +7,47 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ASSET.Data;
 using ASSET.Models.Master;
+using ASSET.Common;
+using ReflectionIT.Mvc.Paging;
+using Microsoft.AspNetCore.Routing;
 
 namespace ASSET.WebSite.Controllers
 {
     public class AssetGroupsController : Controller
     {
         private readonly ASSETContext _context;
+		private readonly Utility _u;
 
-        public AssetGroupsController(ASSETContext context)
+		public AssetGroupsController(ASSETContext context)
         {
             _context = context;
-        }
+			_u = new Utility();
+		}
 
         // GET: AssetGroups
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string filterCode, string filterName, int page = 1, string sortExpression = "Name")
         {
-            return View(await _context.AssetGroup.ToListAsync());
-        }
+			var item = _context.AssetGroup.Where(i => i.IsDelete == 0).AsNoTracking();
+
+			if (!string.IsNullOrWhiteSpace(filterCode))
+			{
+				item = item.Where(p => p.Code.Contains(filterCode));
+			}
+
+			if (!string.IsNullOrWhiteSpace(filterName))
+			{
+				item = item.Where(p => p.Name.Contains(filterName));
+			}
+
+			var model = await PagingList.CreateAsync(item, 10, page, sortExpression, "Name");
+
+			model.RouteValue = new RouteValueDictionary {
+															{ "filterCode", filterCode},
+															{ "filterName", filterName}
+														};
+
+			return View(model);
+		}
 
         // GET: AssetGroups/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -46,7 +70,10 @@ namespace ASSET.WebSite.Controllers
         // GET: AssetGroups/Create
         public IActionResult Create()
         {
-            return View();
+			ViewBag.getCurrentDate = _u.getCurrentDate();
+			ViewBag.getUser = _u.getUser();
+
+			return View();
         }
 
         // POST: AssetGroups/Create
@@ -74,11 +101,17 @@ namespace ASSET.WebSite.Controllers
             }
 
             var assetGroup = await _context.AssetGroup.SingleOrDefaultAsync(m => m.AssetGroupId == id);
-            if (assetGroup == null)
+
+			ViewBag.getCurrentDate = _u.getCurrentDate();
+			ViewBag.getUser = _u.getUser();
+
+			if (assetGroup == null)
             {
                 return NotFound();
             }
-            return View(assetGroup);
+
+
+			return View(assetGroup);
         }
 
         // POST: AssetGroups/Edit/5
@@ -86,7 +119,7 @@ namespace ASSET.WebSite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AssetGroupId,Code,Name,AssetId,CreateBy,CreateDate,UpdateBy,UpdateDate,IsActive,IsDelete")] AssetGroup assetGroup)
+        public async Task<IActionResult> Edit(int id, [Bind("AssetGroupId,Code,Name,CreateBy,CreateDate,UpdateBy,UpdateDate,IsActive,IsDelete")] AssetGroup assetGroup)
         {
             if (id != assetGroup.AssetGroupId)
             {
@@ -113,7 +146,9 @@ namespace ASSET.WebSite.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(assetGroup);
+
+
+			return View(assetGroup);
         }
 
         // GET: AssetGroups/Delete/5
@@ -124,14 +159,17 @@ namespace ASSET.WebSite.Controllers
                 return NotFound();
             }
 
-            var assetGroup = await _context.AssetGroup
-                .SingleOrDefaultAsync(m => m.AssetGroupId == id);
-            if (assetGroup == null)
+            var assetGroup = await _context.AssetGroup.SingleOrDefaultAsync(m => m.AssetGroupId == id);
+
+			if (assetGroup == null)
             {
                 return NotFound();
             }
 
-            return View(assetGroup);
+			ViewBag.getCurrentDate = _u.getCurrentDate();
+			ViewBag.getUser = _u.getUser();
+
+			return View(assetGroup);
         }
 
         // POST: AssetGroups/Delete/5
@@ -140,14 +178,17 @@ namespace ASSET.WebSite.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var assetGroup = await _context.AssetGroup.SingleOrDefaultAsync(m => m.AssetGroupId == id);
-            _context.AssetGroup.Remove(assetGroup);
+			//_context.AssetGroup.Remove(assetGroup);
+
+			assetGroup.setDelete();
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool AssetGroupExists(int id)
         {
-            return _context.AssetGroup.Any(e => e.AssetGroupId == id);
-        }
+            return _context.AssetGroup.Where(i => i.IsDelete == 0).Any(e => e.AssetGroupId == id);
+		}
     }
 }
