@@ -7,6 +7,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
+
+
 namespace ASSET.Common
 {
 	public abstract class Base
@@ -44,10 +46,6 @@ namespace ASSET.Common
 		}
 
 
+		
 	}
-
-
-	
-
-
 }

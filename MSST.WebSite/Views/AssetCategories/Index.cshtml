@@ -1,12 +1,13 @@
-﻿@model IEnumerable<ASSET.Models.Master.AssetCategory>
+﻿@model ReflectionIT.Mvc.Paging.PagingList<ASSET.Models.Master.AssetCategory>
+@using ReflectionIT.Mvc.Paging
+@addTagHelper *, ReflectionIT.Mvc.Paging
 
 @{
 	ViewData["Title"] = "Index";
 	Layout = "~/Views/Shared/_Layout2.cshtml";
 }
 
-<table class="table table-borderless" >
-
+<table class="table table-borderless">
 	<tr>
 		<td>
 			<h2>Asset Category</h2>
@@ -16,7 +17,6 @@
 			<a asp-action="Create" class="btn btn-info" role="button">Create New</a>
 		</td>
 	</tr>
-
 </table>
 
 <!-- BEGIN PAGE BREADCRUMB -->
@@ -31,6 +31,22 @@
 </ul>
 <!-- END PAGE BREADCRUMB -->
 
+<form method="get" class="form-inline">
+
+	<div class="form-group">
+		<label>Code</label>
+		<input name="filterCode" class="form-control" placeholder="Enter Code" value="@Model.RouteValue["filterCode"]" />
+	</div>
+	<div class="form-group">
+		<label>Name</label>
+		<input name="filterName" class="form-control" placeholder="Enter Name" value="@Model.RouteValue["filterName"]" />
+	</div>
+
+	<button type="submit" class="btn btn-primary">
+		<span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search
+	</button>
+</form>
+
 <ul class="nav nav-tabs">
 	<li class="active"><a href="#">List</a></li>
 	<li><a href="#">Search</a></li>
@@ -41,28 +57,28 @@
 	<thead>
 		<tr>
 			<th>
-				@Html.DisplayNameFor(model => model.Code)
+				@Html.SortableHeaderFor(model => model.Code)
 			</th>
 			<th>
-				@Html.DisplayNameFor(model => model.Name)
+				@Html.SortableHeaderFor(model => model.Name)
 			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.CreateBy)
+			<th hidden>
+				@Html.SortableHeaderFor(model => model.CreateBy)
 			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.CreateDate)
+			<th hidden>
+				@Html.SortableHeaderFor(model => model.CreateDate)
 			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.UpdateBy)
+			<th hidden>
+				@Html.SortableHeaderFor(model => model.UpdateBy)
 			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.UpdateDate)
+			<th hidden>
+				@Html.SortableHeaderFor(model => model.UpdateDate)
 			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.IsActive)
+			<th hidden>
+				@Html.SortableHeaderFor(model => model.IsActive)
 			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.IsDelete)
+			<th hidden>
+				@Html.SortableHeaderFor(model => model.IsDelete)
 			</th>
 			<th></th>
 		</tr>
@@ -97,10 +113,14 @@
 				</td>
 				<td>
 					<a asp-action="Edit" asp-route-id="@item.AssetCategoryId">Edit</a> |
-					<a asp-action="Details" asp-route-id="@item.AssetCategoryId">Details</a> |
+					@*<a asp-action="Details" asp-route-id="@item.AssetCategoryId">Details</a> |*@
 					<a asp-action="Delete" asp-route-id="@item.AssetCategoryId">Delete</a>
 				</td>
 			</tr>
 		}
 	</tbody>
 </table>
+
+<nav>
+	@await this.Component.InvokeAsync("Pager", new { PagingList = this.Model })
+</nav>

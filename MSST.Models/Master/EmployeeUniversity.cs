@@ -34,5 +34,8 @@ namespace ASSET.Models.Master
 			UpdateBy = u.getUser();
 			UpdateDate = u.getCurrentDate();
 		}
+
+
+		
 	}
 }
