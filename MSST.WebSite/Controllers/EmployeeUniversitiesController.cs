@@ -7,17 +7,20 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ASSET.Data;
 using ASSET.Models.Master;
+using ASSET.Common;
 
 namespace ASSET.WebSite.Controllers
 {
     public class EmployeeUniversitiesController : Controller
     {
         private readonly ASSETContext _context;
+		private readonly Utility _u;
 
-        public EmployeeUniversitiesController(ASSETContext context)
+		public EmployeeUniversitiesController(ASSETContext context)
         {
-            _context = context;
-        }
+			_context = context;
+			_u = new Utility();
+		}
 
         // GET: EmployeeUniversities
         public async Task<IActionResult> Index()
@@ -75,7 +78,12 @@ namespace ASSET.WebSite.Controllers
             }
 
             var employeeUniversity = await _context.EmployeeUniversity.SingleOrDefaultAsync(m => m.EmployeeUniversityId == id);
-            if (employeeUniversity == null)
+
+			ViewBag.getCurrentDate = _u.getCurrentDate();
+			ViewBag.getUser = _u.getUser();
+
+
+			if (employeeUniversity == null)
             {
                 return NotFound();
             }
