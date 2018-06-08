@@ -19,6 +19,9 @@ namespace ASSET.Models.Master
 		public string Code { get; set; }
 		public string Barcode { get; set; }
 
+		public int AssetBrandId { get; set; }
+		public virtual AssetBrand AssetBrand { get; set; }
+
 		//[Column("Thai Name", TypeName = "ntext")]
 		public string NameThai { get; set; }
 

@@ -11,9 +11,10 @@ using System;
 namespace ASSET.Data.Migrations
 {
     [DbContext(typeof(ASSETContext))]
-    partial class ASSETContextModelSnapshot : ModelSnapshot
+    [Migration("20180608022033_update7")]
+    partial class update7
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,8 +25,6 @@ namespace ASSET.Data.Migrations
                 {
                     b.Property<int>("AssetId")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<int>("AssetBrandId");
 
                     b.Property<int>("AssetCategoryId");
 
@@ -86,9 +85,6 @@ namespace ASSET.Data.Migrations
 
                     b.HasKey("AssetId");
 
-                    b.HasIndex("AssetBrandId")
-                        .IsUnique();
-
                     b.HasIndex("AssetCategoryId")
                         .IsUnique();
 
@@ -128,6 +124,8 @@ namespace ASSET.Data.Migrations
                     b.Property<int>("AssetBrandId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int?>("AssetId");
+
                     b.Property<string>("Code");
 
                     b.Property<string>("CreateBy")
@@ -146,6 +144,8 @@ namespace ASSET.Data.Migrations
                     b.Property<DateTime?>("UpdateDate");
 
                     b.HasKey("AssetBrandId");
+
+                    b.HasIndex("AssetId");
 
                     b.ToTable("AssetBrand");
                 });
@@ -708,11 +708,6 @@ namespace ASSET.Data.Migrations
 
             modelBuilder.Entity("ASSET.Models.Master.Asset", b =>
                 {
-                    b.HasOne("ASSET.Models.Master.AssetBrand", "AssetBrand")
-                        .WithOne("Asset")
-                        .HasForeignKey("ASSET.Models.Master.Asset", "AssetBrandId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("ASSET.Models.Master.AssetCategory", "Category")
                         .WithOne("Asset")
                         .HasForeignKey("ASSET.Models.Master.Asset", "AssetCategoryId")
@@ -768,6 +763,13 @@ namespace ASSET.Data.Migrations
                         .WithOne("Asset")
                         .HasForeignKey("ASSET.Models.Master.Asset", "OwnershipId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ASSET.Models.Master.AssetBrand", b =>
+                {
+                    b.HasOne("ASSET.Models.Master.Asset", "Asset")
+                        .WithMany()
+                        .HasForeignKey("AssetId");
                 });
 
             modelBuilder.Entity("ASSET.Models.Master.AssetWarranty", b =>

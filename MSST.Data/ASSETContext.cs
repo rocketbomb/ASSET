@@ -15,6 +15,7 @@ namespace ASSET.Data
 
 		
 		public DbSet<Asset> Asset { get; set; }
+		public DbSet<AssetBrand> AssetBrand { get; set; }
 		public DbSet<AssetCategory> AssetCategory { get; set; }
 		public DbSet<AssetDepreciation> AssetDepreciation { get; set; }
 		public DbSet<AssetGroup> AssetGroup { get; set; }

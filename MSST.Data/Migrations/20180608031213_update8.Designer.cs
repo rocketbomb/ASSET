@@ -11,9 +11,10 @@ using System;
 namespace ASSET.Data.Migrations
 {
     [DbContext(typeof(ASSETContext))]
-    partial class ASSETContextModelSnapshot : ModelSnapshot
+    [Migration("20180608031213_update8")]
+    partial class update8
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

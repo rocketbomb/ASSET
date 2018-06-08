@@ -1,0 +1,128 @@
+﻿@model ReflectionIT.Mvc.Paging.PagingList<ASSET.Models.Master.AssetBrand>
+@using ReflectionIT.Mvc.Paging
+@addTagHelper *, ReflectionIT.Mvc.Paging
+
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+
+<table class="table table-borderless">
+	<tr>
+		<td>
+			<h2>Asset Brand</h2>
+		</td>
+		<td class="text-right">
+			<div class="margin-bottom-5"></div>
+			<a asp-action="Create" class="btn btn-info" role="button">Create New</a>
+		</td>
+	</tr>
+</table>
+
+<!-- BEGIN PAGE BREADCRUMB -->
+<ul class="page-breadcrumb breadcrumb">
+	<li>
+		<a href="Index">Home</a>
+		<i class="fa fa-circle"></i>
+	</li>
+	<li>
+		<span class="active">Page Layouts</span>
+	</li>
+</ul>
+<!-- END PAGE BREADCRUMB -->
+
+<form method="get" class="form-inline">
+
+	<div class="form-group">
+		<label>Code</label>
+		<input name="filterCode" class="form-control" placeholder="Enter Code" value="@Model.RouteValue["filterCode"]" />
+	</div>
+	<div class="form-group">
+		<label>Name</label>
+		<input name="filterName" class="form-control" placeholder="Enter Name" value="@Model.RouteValue["filterName"]" />
+	</div>
+
+	<button type="submit" class="btn btn-primary">
+		<span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search
+	</button>
+</form>
+
+<ul class="nav nav-tabs">
+	<li class="active"><a href="#">List</a></li>
+	<li><a href="#">Search</a></li>
+
+</ul>
+
+<table class="table table-bordered table-condensed table-hover">
+	<thead>
+		<tr>
+			<th>
+				@Html.SortableHeaderFor(model => model.Code)
+			</th>
+			<th>
+				@Html.SortableHeaderFor(model => model.Name)
+			</th>
+			<th hidden>
+				@Html.SortableHeaderFor(model => model.CreateBy)
+			</th>
+			<th hidden>
+				@Html.SortableHeaderFor(model => model.CreateDate)
+			</th>
+			<th hidden>
+				@Html.SortableHeaderFor(model => model.UpdateBy)
+			</th>
+			<th hidden>
+				@Html.SortableHeaderFor(model => model.UpdateDate)
+			</th>
+			<th hidden>
+				@Html.SortableHeaderFor(model => model.IsActive)
+			</th>
+			<th hidden>
+				@Html.SortableHeaderFor(model => model.IsDelete)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.Code)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Name)
+				</td>
+				<td hidden>
+					@Html.DisplayFor(modelItem => item.CreateBy)
+				</td>
+				<td hidden>
+					@Html.DisplayFor(modelItem => item.CreateDate)
+				</td>
+				<td hidden>
+					@Html.DisplayFor(modelItem => item.UpdateBy)
+				</td>
+				<td hidden>
+					@Html.DisplayFor(modelItem => item.UpdateDate)
+				</td>
+				<td hidden>
+					@Html.DisplayFor(modelItem => item.IsActive)
+				</td>
+				<td hidden>
+					@Html.DisplayFor(modelItem => item.IsDelete)
+				</td>
+				<td>
+					<a asp-action="Edit" asp-route-id="@item.AssetBrandId">Edit</a> |
+					@*<a asp-action="Details" asp-route-id="@item.AssetBrandId">Details</a> |*@
+					<a asp-action="Delete" asp-route-id="@item.AssetBrandId">Delete</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+
+
+<nav>
+	@await this.Component.InvokeAsync("Pager", new { PagingList = this.Model })
+</nav>
