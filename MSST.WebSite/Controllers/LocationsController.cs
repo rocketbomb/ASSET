@@ -7,23 +7,49 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ASSET.Data;
 using ASSET.Models.Master;
+using ASSET.Common;
+using ReflectionIT.Mvc.Paging;
+using Microsoft.AspNetCore.Routing;
 
 namespace ASSET.WebSite.Controllers
 {
     public class LocationsController : Controller
     {
         private readonly ASSETContext _context;
+		private readonly Utility _u;
 
-        public LocationsController(ASSETContext context)
+		public LocationsController(ASSETContext context)
         {
             _context = context;
-        }
+			_u = new Utility();
+		}
 
         // GET: Locations
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Location.ToListAsync());
-        }
+        public async Task<IActionResult> Index(string filterCode, string filterName, int page = 1, string sortExpression = "Name")
+		{
+			var item = _context.Location.Where(i => i.IsDelete == 0).AsNoTracking();
+
+			if (!string.IsNullOrWhiteSpace(filterCode))
+			{
+				item = item.Where(p => p.Code.Contains(filterCode));
+			}
+
+			if (!string.IsNullOrWhiteSpace(filterName))
+			{
+				item = item.Where(p => p.Name.Contains(filterName));
+			}
+
+			var model = await PagingList.CreateAsync(item, 10, page, sortExpression, "Name");
+
+			model.RouteValue = new RouteValueDictionary {
+															{ "filterCode", filterCode},
+															{ "filterName", filterName}
+														};
+
+			return View(model);
+
+			//return View(await _context.Location.ToListAsync());
+		}
 
         // GET: Locations/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -46,7 +72,11 @@ namespace ASSET.WebSite.Controllers
         // GET: Locations/Create
         public IActionResult Create()
         {
-            return View();
+			ViewBag.getLocationGroupList = getLocationGroupList();
+			ViewBag.getCurrentDate = _u.getCurrentDate();
+			ViewBag.getUser = _u.getUser();
+
+			return View();
         }
 
         // POST: Locations/Create
@@ -73,7 +103,9 @@ namespace ASSET.WebSite.Controllers
                 return NotFound();
             }
 
-            var location = await _context.Location.SingleOrDefaultAsync(m => m.LocationId == id);
+			ViewBag.ListofLocationGroup = await _context.LocationGroup.ToListAsync();
+
+			var location = await _context.Location.SingleOrDefaultAsync(m => m.LocationId == id);
             if (location == null)
             {
                 return NotFound();
@@ -140,7 +172,10 @@ namespace ASSET.WebSite.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var location = await _context.Location.SingleOrDefaultAsync(m => m.LocationId == id);
-            _context.Location.Remove(location);
+			//_context.Location.Remove(location);
+
+			location.setDelete();
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
@@ -149,5 +184,16 @@ namespace ASSET.WebSite.Controllers
         {
             return _context.Location.Any(e => e.LocationId == id);
         }
-    }
+
+
+		public List<LocationGroup> getLocationGroupList()
+		{
+			List<LocationGroup> u = new List<LocationGroup>();
+			u = _context.LocationGroup.Where(i => i.IsActive == 1 && i.IsDelete == 0).ToList();
+
+			return u;
+		}
+
+
+	}
 }

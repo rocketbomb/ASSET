@@ -183,7 +183,10 @@ namespace ASSET.WebSite.Controllers
 		public async Task<IActionResult> DeleteConfirmed(int id)
 		{
 			var employeeFaculty = await _context.EmployeeFaculty.SingleOrDefaultAsync(m => m.EmployeeFacultyId == id);
-			_context.EmployeeFaculty.Remove(employeeFaculty);
+			//_context.EmployeeFaculty.Remove(employeeFaculty);
+
+			employeeFaculty.setDelete();
+
 			await _context.SaveChangesAsync();
 			return RedirectToAction(nameof(Index));
 		}
