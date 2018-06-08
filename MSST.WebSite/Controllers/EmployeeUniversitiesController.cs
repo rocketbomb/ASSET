@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using ASSET.Data;
 using ASSET.Models.Master;
 using ASSET.Common;
+using ReflectionIT.Mvc.Paging;
+using Microsoft.AspNetCore.Routing;
 
 namespace ASSET.WebSite.Controllers
 {
@@ -23,10 +25,37 @@ namespace ASSET.WebSite.Controllers
 		}
 
         // GET: EmployeeUniversities
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string filterCode, string filterNameEng, string filterNameThai, int page = 1, string sortExpression = "NameEng")
         {
-            return View(await _context.EmployeeUniversity.ToListAsync());
-        }
+			var item = _context.EmployeeUniversity.Where(i => i.IsDelete == 0).AsNoTracking();
+
+			if (!string.IsNullOrWhiteSpace(filterCode))
+			{
+				item = item.Where(p => p.Code.Contains(filterCode));
+			}
+
+			if (!string.IsNullOrWhiteSpace(filterNameEng))
+			{
+				item = item.Where(p => p.NameEng.Contains(filterNameEng));
+			}
+
+			if (!string.IsNullOrWhiteSpace(filterNameThai))
+			{
+				item = item.Where(p => p.NameThai.Contains(filterNameThai));
+			}
+
+			var model = await PagingList.CreateAsync(item, 10, page, sortExpression, "NameEng");
+
+			model.RouteValue = new RouteValueDictionary {
+															{ "filterCode", filterCode},
+															{ "filterNameEng", filterNameEng},
+															{ "filterNameThai", filterNameThai}
+														};
+
+			return View(model);
+
+			// return View(await _context.EmployeeUniversity.ToListAsync());
+		}
 
         // GET: EmployeeUniversities/Details/5
         public async Task<IActionResult> Details(int? id)

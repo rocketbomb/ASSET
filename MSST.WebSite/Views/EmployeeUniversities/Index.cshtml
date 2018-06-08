@@ -1,4 +1,6 @@
-﻿@model IEnumerable<ASSET.Models.Master.EmployeeUniversity>
+﻿@model ReflectionIT.Mvc.Paging.PagingList<ASSET.Models.Master.EmployeeUniversity>
+@using ReflectionIT.Mvc.Paging
+@addTagHelper *, ReflectionIT.Mvc.Paging
 
 @{
 	ViewData["Title"] = "Index";
@@ -37,6 +39,24 @@
 
 </ul>
 
+<form method="get" class="form-inline">
+
+	<div class="form-group">
+		<label>Code</label>
+		<input name="filterCode" class="form-control" placeholder="Enter Code" value="@Model.RouteValue["filterCode"]" />
+	</div>
+	<div class="form-group">
+		<label>Name Thai</label>
+		<input name="filterNameThai" class="form-control" placeholder="Enter Name" value="@Model.RouteValue["filterNameThai"]" />
+	</div>
+	<div class="form-group">
+		<label>Name English</label>
+		<input name="filterNameEng" class="form-control" placeholder="Enter Name" value="@Model.RouteValue["filterNameEng"]" />
+	</div>
+	<button type="submit" class="btn btn-primary">
+		<span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search
+	</button>
+</form>
 
 <table class="table table-bordered table-condensed table-hover">
 	<thead>
@@ -50,6 +70,8 @@
 			<th>
 				@Html.DisplayNameFor(model => model.NameEng)
 			</th>
+
+
 			@*<th>
 					@Html.DisplayNameFor(model => model.CreateBy)
 				</th>
@@ -84,6 +106,8 @@
 				<td>
 					@Html.DisplayFor(modelItem => item.NameEng)
 				</td>
+
+
 				@*<td>
 						@Html.DisplayFor(modelItem => item.CreateBy)
 					</td>
@@ -111,3 +135,7 @@
 		}
 	</tbody>
 </table>
+
+<nav>
+	@await this.Component.InvokeAsync("Pager", new { PagingList = this.Model })
+</nav>
