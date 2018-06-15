@@ -7,23 +7,55 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ASSET.Data;
 using ASSET.Models.Master;
+using ASSET.Common;
+using ReflectionIT.Mvc.Paging;
+using Microsoft.AspNetCore.Routing;
 
 namespace ASSET.WebSite.Controllers
 {
     public class LocationGroupsController : Controller
     {
         private readonly ASSETContext _context;
+		private readonly Utility _u;
 
-        public LocationGroupsController(ASSETContext context)
+		public LocationGroupsController(ASSETContext context)
         {
             _context = context;
-        }
+			_u = new Utility();
+		}
 
         // GET: LocationGroups
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string filterCode, string filterNameEng, string filterName, int page = 1, string sortExpression = "Name")
         {
-            return View(await _context.LocationGroup.ToListAsync());
-        }
+			var item = _context.LocationGroup.Where(i => i.IsDelete == 0).AsNoTracking();
+
+			if (!string.IsNullOrWhiteSpace(filterCode))
+			{
+				item = item.Where(p => p.Code.Contains(filterCode));
+			}
+
+			if (!string.IsNullOrWhiteSpace(filterNameEng))
+			{
+				item = item.Where(p => p.Name.Contains(filterNameEng));
+			}
+
+			if (!string.IsNullOrWhiteSpace(filterName))
+			{
+				item = item.Where(p => p.Name.Contains(filterName));
+			}
+
+			var model = await PagingList.CreateAsync(item, 10, page, sortExpression, "Name");
+
+			model.RouteValue = new RouteValueDictionary {
+															{ "filterCode", filterCode},
+															{ "filterName", filterName},
+															
+														};
+
+			return View(model);
+
+			// return View(await _context.LocationGroup.ToListAsync());
+		}
 
         // GET: LocationGroups/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -46,7 +78,10 @@ namespace ASSET.WebSite.Controllers
         // GET: LocationGroups/Create
         public IActionResult Create()
         {
-            return View();
+			ViewBag.getCurrentDate = _u.getCurrentDate();
+			ViewBag.getUser = _u.getUser();
+
+			return View();
         }
 
         // POST: LocationGroups/Create
@@ -74,7 +109,11 @@ namespace ASSET.WebSite.Controllers
             }
 
             var locationGroup = await _context.LocationGroup.SingleOrDefaultAsync(m => m.LocationGroupId == id);
-            if (locationGroup == null)
+
+			ViewBag.getCurrentDate = _u.getCurrentDate();
+			ViewBag.getUser = _u.getUser();
+
+			if (locationGroup == null)
             {
                 return NotFound();
             }
@@ -140,14 +179,17 @@ namespace ASSET.WebSite.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var locationGroup = await _context.LocationGroup.SingleOrDefaultAsync(m => m.LocationGroupId == id);
-            _context.LocationGroup.Remove(locationGroup);
-            await _context.SaveChangesAsync();
+			//_context.LocationGroup.Remove(locationGroup);
+
+			locationGroup.setDelete();
+
+			await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool LocationGroupExists(int id)
         {
-            return _context.LocationGroup.Any(e => e.LocationGroupId == id);
+            return _context.LocationGroup.Where(i=>i.IsDelete == 0).Any(e => e.LocationGroupId == id);
         }
     }
 }

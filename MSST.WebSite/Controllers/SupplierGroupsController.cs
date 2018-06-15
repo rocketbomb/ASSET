@@ -7,17 +7,23 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ASSET.Data;
 using ASSET.Models.Master;
+using ASSET.Common;
+using ReflectionIT.Mvc.Paging;
+using Microsoft.AspNetCore.Routing;
 
 namespace ASSET.WebSite.Controllers
 {
     public class SupplierGroupsController : Controller
     {
         private readonly ASSETContext _context;
+		private readonly Utility _u;
 
-        public SupplierGroupsController(ASSETContext context)
+		public SupplierGroupsController(ASSETContext context)
         {
             _context = context;
-        }
+			_u = new Utility();
+
+		}
 
         // GET: SupplierGroups
         public async Task<IActionResult> Index()
@@ -46,7 +52,11 @@ namespace ASSET.WebSite.Controllers
         // GET: SupplierGroups/Create
         public IActionResult Create()
         {
-            return View();
+
+			ViewBag.getCurrentDate = _u.getCurrentDate();
+			ViewBag.getUser = _u.getUser();
+
+			return View();
         }
 
         // POST: SupplierGroups/Create
@@ -74,7 +84,11 @@ namespace ASSET.WebSite.Controllers
             }
 
             var supplierGroup = await _context.SupplierGroup.SingleOrDefaultAsync(m => m.SupplierGroupId == id);
-            if (supplierGroup == null)
+
+			ViewBag.getCurrentDate = _u.getCurrentDate();
+			ViewBag.getUser = _u.getUser();
+
+			if (supplierGroup == null)
             {
                 return NotFound();
             }

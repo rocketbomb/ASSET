@@ -6,6 +6,7 @@
 	ViewData["Title"] = "Index";
 	Layout = "~/Views/Shared/_Layout2.cshtml";
 }
+
 <table class="table table-borderless">
 
 	<tr>
@@ -66,23 +67,23 @@
 				@Html.DisplayNameFor(model => model.Name)
 			</th>
 			@*<th>
-				@Html.DisplayNameFor(model => model.CreateBy)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.CreateDate)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.UpdateBy)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.UpdateDate)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.IsActive)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.IsDelete)
-			</th>*@
+					@Html.DisplayNameFor(model => model.CreateBy)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.CreateDate)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.UpdateBy)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.UpdateDate)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.IsActive)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.IsDelete)
+				</th>*@
 			<th></th>
 		</tr>
 	</thead>
@@ -100,23 +101,23 @@
 					@Html.DisplayFor(modelItem => item.Name)
 				</td>
 				@*<td>
-					@Html.DisplayFor(modelItem => item.CreateBy)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.CreateDate)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.UpdateBy)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.UpdateDate)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.IsActive)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.IsDelete)
-				</td>*@
+						@Html.DisplayFor(modelItem => item.CreateBy)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.CreateDate)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.UpdateBy)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.UpdateDate)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.IsActive)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.IsDelete)
+					</td>*@
 				<td>
 					<a asp-action="Edit" asp-route-id="@item.LocationGroupId">Edit</a> |
 					@*<a asp-action="Details" asp-route-id="@item.LocationGroupId">Details</a> |*@
@@ -126,3 +127,7 @@
 		}
 	</tbody>
 </table>
+
+<nav>
+	@await this.Component.InvokeAsync("Pager", new { PagingList = this.Model })
+</nav>

@@ -178,14 +178,17 @@ namespace ASSET.WebSite.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var employeeUniversity = await _context.EmployeeUniversity.SingleOrDefaultAsync(m => m.EmployeeUniversityId == id);
-            _context.EmployeeUniversity.Remove(employeeUniversity);
-            await _context.SaveChangesAsync();
+			//_context.EmployeeUniversity.Remove(employeeUniversity);
+
+			employeeUniversity.setDelete();
+
+			await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool EmployeeUniversityExists(int id)
         {
-            return _context.EmployeeUniversity.Any(e => e.EmployeeUniversityId == id);
+            return _context.EmployeeUniversity.Where(i=>i.IsDelete == 0).Any(e => e.EmployeeUniversityId == id);
         }
     }
 }
