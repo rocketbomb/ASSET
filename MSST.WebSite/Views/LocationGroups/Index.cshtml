@@ -1,4 +1,6 @@
-﻿@model IEnumerable<ASSET.Models.Master.LocationGroup>
+﻿@model ReflectionIT.Mvc.Paging.PagingList<ASSET.Models.Master.LocationGroup>
+@using ReflectionIT.Mvc.Paging
+@addTagHelper *, ReflectionIT.Mvc.Paging
 
 @{
 	ViewData["Title"] = "Index";
@@ -36,6 +38,20 @@
 
 </ul>
 
+<form method="get" class="form-inline">
+
+	<div class="form-group">
+		<label>Code</label>
+		<input name="filterCode" class="form-control" placeholder="Enter Code" value="@Model.RouteValue["filterCode"]" />
+	</div>
+	<div class="form-group">
+		<label>Name Thai</label>
+		<input name="filterName" class="form-control" placeholder="Enter Name" value="@Model.RouteValue["filterName"]" />
+	</div>
+	<button type="submit" class="btn btn-primary">
+		<span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search
+	</button>
+</form>
 
 <table class="table table-bordered table-condensed table-hover">
 	<thead>
@@ -49,7 +65,7 @@
 			<th>
 				@Html.DisplayNameFor(model => model.Name)
 			</th>
-			<th>
+			@*<th>
 				@Html.DisplayNameFor(model => model.CreateBy)
 			</th>
 			<th>
@@ -66,7 +82,7 @@
 			</th>
 			<th>
 				@Html.DisplayNameFor(model => model.IsDelete)
-			</th>
+			</th>*@
 			<th></th>
 		</tr>
 	</thead>
@@ -83,7 +99,7 @@
 				<td>
 					@Html.DisplayFor(modelItem => item.Name)
 				</td>
-				<td>
+				@*<td>
 					@Html.DisplayFor(modelItem => item.CreateBy)
 				</td>
 				<td>
@@ -100,10 +116,10 @@
 				</td>
 				<td>
 					@Html.DisplayFor(modelItem => item.IsDelete)
-				</td>
+				</td>*@
 				<td>
 					<a asp-action="Edit" asp-route-id="@item.LocationGroupId">Edit</a> |
-					<a asp-action="Details" asp-route-id="@item.LocationGroupId">Details</a> |
+					@*<a asp-action="Details" asp-route-id="@item.LocationGroupId">Details</a> |*@
 					<a asp-action="Delete" asp-route-id="@item.LocationGroupId">Delete</a>
 				</td>
 			</tr>
